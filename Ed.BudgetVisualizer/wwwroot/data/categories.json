@@ -1,0 +1,738 @@
+﻿[
+  {
+    "Name": "Utilities",
+    "OriginRegex": "AS LATVENERGO"
+  },
+  {
+    "Name": "Rent",
+    "OriginRegex": "SIA \"HAUSMASTER\""
+  },
+  {
+    "Name": "Rent",
+    "OriginRegex": "SIA \"\"HAUSMASTER\"\""
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "RIMI"
+  },
+  {
+    "Name": "Mortgage",
+    "DescriptionRegex": "Līg. VZ15016"
+  },
+  {
+    "Name": "Entertainment",
+    "DescriptionRegex": "ESERS PLUS, BRIVIBAS/RIGA/LV"
+  },
+  {
+    "Name": "Furniture",
+    "DescriptionRegex": "IKEA"
+  },
+  {
+    "Name": "Insurance",
+    "DescriptionRegex": "Apdrošināšanas prēmijas maksājums"
+  },
+  {
+    "Name": "Media",
+    "DescriptionRegex": "DEEZER"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "NARVESEN"
+  },
+  {
+    "Name": "Entertainment",
+    "DescriptionRegex": "STEAM GAMES"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "TVM Jugla"
+  },
+  {
+    "Name": "Entertainment",
+    "DescriptionRegex": "MICROSOFT XBOX"
+  },
+  {
+    "Name": "Banking",
+    "DescriptionRegex": "apkalpošanas maksa par"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "TXFY.ME"
+  },
+  {
+    "Name": "Lunch",
+    "DescriptionRegex": "KAFE 1919"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "MINI TVM"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "Mini TVM"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "Mini TVm"
+  },
+  {
+    "Name": "Utilities",
+    "OriginRegex": "SIA Lattelecom"
+  },
+  {
+    "Name": "Utilities",
+    "OriginRegex": "SIA Tet"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "TALLINAS PAGALMS"
+  },
+  {
+    "Name": "Salary",
+    "OriginRegex": "ACCENTURE LATVIJAS FILIĀLE"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "STOCKMANN"
+  },
+  {
+    "Name": "Cash",
+    "DescriptionRegex": "ATM\\d+"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "Andra Āboliņa"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "ANDRA ĀBOLIŅA"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "ŠULTS AGRIS"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "ILZE ŠULTE"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "SAMANTA KUČIKA"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "Samanta Kučika"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "BELTE MARTINS"
+  },
+  {
+    "Name": "Medical",
+    "DescriptionRegex": "A Aptieka"
+  },
+  {
+    "Name": "Hobbies",
+    "DescriptionRegex": "SALONVEIKALS RAKSTA"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "MCDONALDS"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "TAKSIHELSINKI"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "Borts"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "K market"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "S MARKET"
+  },
+  {
+    "Name": "Lunch",
+    "DescriptionRegex": "DYLAN MILK"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "FIT466-HEL T2NS"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "HSL Ruoholahti"
+  },
+  {
+    "Name": "Hotel",
+    "DescriptionRegex": "HILTON"
+  },
+  {
+    "Name": "Hotel",
+    "DescriptionRegex": "HOLIDAY INN"
+  },
+  {
+    "Name": "Entertainment",
+    "DescriptionRegex": "CCP GAMES"
+  },
+  {
+    "Name": "Medical",
+    "DescriptionRegex": "Laboratorija Ri"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "HSL Hakaniemi"
+  },
+  {
+    "Name": "Pension",
+    "OriginRegex": "SEB-SABALANSĒTAIS"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "PICERIJA CAN CAN"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "Wolt"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "AMAZON.DE"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "ALIEXPRESS"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "lulu"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "PICA LULU"
+  },
+  {
+    "Name": "Revolut",
+    "DescriptionRegex": "REVOLUT"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "VEIKALS NR.1"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "SIA BRAVO"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "CIRCLE K"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "Puke-salons-Sigulda"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "LATS VEIKALS"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "SIA Terbatas Steiki"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "JUNGE"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "SIA KROKUS"
+  },
+  {
+    "Name": "Furniture",
+    "OriginRegex": "Dārta"
+  },
+  {
+    "Name": "Hobbies",
+    "DescriptionRegex": "Čiekura laivu brauciens"
+  },
+  {
+    "Name": "Entertainment",
+    "DescriptionRegex": "MICROSOFT MICR"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "Linda Kļava"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "MUCENIECE IVETA"
+  },
+  {
+    "Name": "Tax",
+    "OriginRegex": "RĪGAS PILSĒTAS PAŠVALDĪBA"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "Kukotava"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "Subburger"
+  },
+  {
+    "Name": "Travel",
+    "DescriptionRegex": "ART FOLK FEST"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "TQ 2941"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "EZITIS"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "MOOMIN SHOP"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "HANDELSAGEN"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "SWEET DELIGHTS"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "Elīna Šmite"
+  },
+  {
+    "Name": "Medical",
+    "DescriptionRegex": "Meness aptieka"
+  },
+  {
+    "Name": "Banking",
+    "DescriptionRegex": "Komisija"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "DATORLIETAS"
+  },
+  {
+    "Name": "Entertainment",
+    "DescriptionRegex": "Cinamon ALFA"
+  },
+  {
+    "Name": "Entertainment",
+    "DescriptionRegex": "Cinamon Alfa"
+  },
+  {
+    "Name": "Clothes",
+    "DescriptionRegex": "Karkade"
+  },
+  {
+    "Name": "Medical",
+    "DescriptionRegex": "aptieka Krasts"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "Aibe"
+  },
+  {
+    "Name": "Entertainment",
+    "DescriptionRegex": "Forum Cinemas"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "Lauku Bauda"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "NESTE"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "IK Laeta"
+  },
+  {
+    "Name": "Entertainment",
+    "DescriptionRegex": "Boulinga sporta klubs"
+  },
+  {
+    "Name": "Entertainment",
+    "DescriptionRegex": "BOULINGS"
+  },
+  {
+    "Name": "Car",
+    "DescriptionRegex": "AUTOSALONSSERBRIVIBA"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "PAKISTANAS KEB"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "BOLT.EU"
+  },
+  {
+    "Name": "Hotel",
+    "DescriptionRegex": "Metsis hotell"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "ICA AB"
+  },
+  {
+    "Name": "Entertainment",
+    "DescriptionRegex": "Raksi"
+  },
+  {
+    "Name": "Refund",
+    "OriginRegex": "MS GLOBAL FINANCE LIMITED"
+  },
+  {
+    "Name": "Refund",
+    "OriginRegex": "VALSTS KASE"
+  },
+  {
+    "Name": "Donations",
+    "DescriptionRegex": "WIKIPEDIA"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "Klāvs Lībeks"
+  },
+  {
+    "Name": "Insurance",
+    "OriginRegex": "IF P&C"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "Wizz Air"
+  },
+  {
+    "Name": "Clothing",
+    "DescriptionRegex": "RESERVED"
+  },
+  {
+    "Name": "Clothing",
+    "DescriptionRegex": "ORSAY"
+  },
+  {
+    "Name": "Hotel",
+    "DescriptionRegex": "PEARL HOTELS"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "DROGAS"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "ATRAS APKALPOS"
+  },
+  {
+    "Name": "Entertainment",
+    "DescriptionRegex": "LONDON EYE"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "TESCO"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "GWR SLOUGH"
+  },
+  {
+    "Name": "Entertainment",
+    "DescriptionRegex": "WINDSOR CASTLE"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "TSGN"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "NANDOS"
+  },
+  {
+    "Name": "Clothing",
+    "DescriptionRegex": "PRIMARK"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "EMPRESS GIFTS"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "HOTEL CHOCOLAT"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "THE ROYAL OAK"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "TEDS FISH AND CHIP"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "STARBUCKS"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "TOWER HOTEL"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "HARDYS WINDSOR"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "PADDINGTON LUGGAGE"
+  },
+  {
+    "Name": "Shoppping",
+    "DescriptionRegex": "W H SMITH"
+  },
+  {
+    "Name": "Shopping",
+    "OriginRegex": "EKOSHOP SIA"
+  },
+  {
+    "Name": "Investments",
+    "DescriptionRegex": "Iemaksa krājkontā"
+  },
+  {
+    "Name": "Travel",
+    "OriginRegex": "American Express Services Europe Limited"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "Ziedu baze"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "Alkoutlet"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "IKSKISI TERVETE"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "RESTORANS DZIRNAVU"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "RESTORANS DZIRNAVU"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "PEPCO"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "Latvijas Roze"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "LAPELS JĀNIS"
+  },
+  {
+    "Name": "Clothing",
+    "DescriptionRegex": "DONNA B.C."
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "Burgeru Maja"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "Elvi"
+  },
+  {
+    "Name": "Clothing",
+    "DescriptionRegex": "NS KING"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "KAFEJNICA PAGRABINS"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "DELISNACK"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "MAXIMA"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "HESBURGER"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "Top-veikals"
+  },
+  {
+    "Name": "Clothing",
+    "DescriptionRegex": "Apranga"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "Laucu akmens"
+  },
+  {
+    "Name": "Clothing",
+    "DescriptionRegex": "TC DOMINA"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "GUSTAVBEKEREJA"
+  },
+  {
+    "Name": "Clothing",
+    "DescriptionRegex": "PASAULES OPTIKA"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "CENUKLUBS.LV"
+  },
+  {
+    "Name": "Travel",
+    "DescriptionRegex": "Khelvachauri"
+  },
+  {
+    "Name": "Travel",
+    "DescriptionRegex": "Kobuleti"
+  },
+  {
+    "Name": "Travel",
+    "DescriptionRegex": "KOBULETI"
+  },
+  {
+    "Name": "Travel",
+    "DescriptionRegex": "Gori"
+  },
+  {
+    "Name": "Clothing",
+    "DescriptionRegex": "JAGUAR"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "GB PIEGADE"
+  },
+  {
+    "Name": "Travel",
+    "DescriptionRegex": "Tbilisi"
+  },
+  {
+    "Name": "Furniture",
+    "DescriptionRegex": "Komforts-Veikals"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "CHI/RIGA"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "Depo-veikals"
+  },
+  {
+    "Name": "Shopping",
+    "OriginRegex": "FKMD elektro SIA"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "KHINKALNYA"
+  },
+  {
+    "Name": "Media",
+    "DescriptionRegex": "MSFT AZURE"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "BELGIAN BEER RESTORAU"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "Priedes-veikals"
+  },
+  {
+    "Name": "Entertainment",
+    "DescriptionRegex": "www.forumcinemas.lv"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "Cesu RPB"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "Dzelmes DUS"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "Gaismas Magija"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "MOTORMUZEJA KAFEJNICA"
+  },
+  {
+    "Name": "Entertainment",
+    "DescriptionRegex": "Brivdabas muzejs"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "K.SENUKAI"
+  },
+  {
+    "Name": "Car",
+    "DescriptionRegex": "www.csdd.lv"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "Skriveri DUS"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "Queens Pub"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "DPD Latvija"
+  },
+  {
+    "Name": "Media",
+    "DescriptionRegex": "MSBILL.INFO"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "VITO SIA"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "VITO SIA"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "Bulkotava"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "M79/RIGA"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "Janis Roze"
+  },
+  {
+    "Name": "Insurance",
+    "OriginRegex": "AAS BALTA"
+  }
+]

@@ -1,0 +1,18 @@
+﻿[
+  {
+    "Name": "Utilities",
+    "OriginRegex": "AS LATVENERGO"
+  },
+  {
+    "Name": "Rent",
+    "OriginRegex": "SIA \"HAUSMASTER\""
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "RIMI"
+  },
+  {
+    "Name": "Mortgage",
+    "DescriptionRegex": "Līg. VZ12345"
+  }
+]
