@@ -87,7 +87,7 @@
     /// </summary>
     protected override async Task OnInitializedAsync()
     {
-        // Load already stored transactions
+        // Load stored transactions
         Transactions = await Storage.GetItem<List<Transaction>>(key);
 
         // If there aren't any, initialize the storage
@@ -107,6 +107,7 @@
         int parsedTransactionCount = 0;
         List<Category> categories = await Http.GetJsonAsync<List<Category>>("data/categories.json");
 
+        // Parse transactions and add them to the transaction list
         foreach (var file in files)
         {
             // TODO: Support more CSV formats
@@ -119,6 +120,7 @@
             }
         }
 
+        // Update the transaction storage
         if (parsedTransactionCount > 0)
         {
             await Storage.SetItem<List<Transaction>>(key, Transactions);
@@ -128,7 +130,7 @@
     }
 
     /// <summary>
-    /// Handles transacrion exclusion toggle event.
+    /// Handles transaction exclusion toggle event.
     /// </summary>
     /// <param name="transaction">The transaction to toggle.</param>
     private async Task OnToggleExcluded(Transaction transaction)

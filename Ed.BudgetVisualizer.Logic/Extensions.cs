@@ -13,9 +13,10 @@ namespace Ed.BudgetVisualizer.Logic
         /// Transforms a list of transactions to a diagram model.
         /// </summary>
         /// <param name="transactions">Transaction list.</param>
-        public static List<Diagram> ToDiagramModel(this List<Transaction> transactions)
+        public static DiagramViewModel ToDiagramModel(this List<Transaction> transactions)
         {
             var diagrams = new List<Diagram>();
+            var savings = new List<decimal>();
 
             // Group months
             var months = transactions
@@ -86,6 +87,7 @@ namespace Ed.BudgetVisualizer.Logic
                         To = "Savings",
                         Value = diff,
                     });
+                    savings.Add(diff);
                 }
                 else if (diff < 0)
                 {
@@ -100,7 +102,11 @@ namespace Ed.BudgetVisualizer.Logic
                 diagrams.Add(diagram);
             }
 
-            return diagrams;
+            return new DiagramViewModel
+            {
+                Diagrams = diagrams,
+                MonthlySavingsAverage = savings.Average(),
+            };
         }
     }
 }

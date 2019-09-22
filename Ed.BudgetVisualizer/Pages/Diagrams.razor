@@ -5,6 +5,13 @@
 
 <h1>Diagrams</h1>
 
+@if (Model != null && Model.MonthlySavingsAverage > 0)
+{
+    <div class="alert alert-info" role="alert">
+        Average monthly savings over @Model.Diagrams.Count months: <b>@Model.MonthlySavingsAverage.ToString("N2")</b>
+    </div>
+}
+
 <div id="diagram-container">
     <p>No transactions loaded, cannot generate diagrams.</p>
 </div>
@@ -12,6 +19,7 @@
 @code {
     private string key = "transactions";
     private List<Transaction> Transactions;
+    private DiagramViewModel Model;
 
     /// <summary>
     /// Handles the component initialization event.
@@ -28,9 +36,11 @@
             Transactions = await Storage.GetItem<List<Transaction>>(key);
         }
 
+        // If there are transactions loaded, generate the diagrams
         if (Transactions.Any())
         {
-            await JsRuntime.InvokeAsync<bool>("RenderDiagram", Transactions.ToDiagramModel());
+            Model = Transactions.ToDiagramModel();
+            await JsRuntime.InvokeAsync<bool>("RenderDiagrams", Model.Diagrams);
         }
     }
 }

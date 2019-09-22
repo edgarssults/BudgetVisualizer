@@ -1,6 +1,6 @@
-﻿window.RenderDiagram = (diagrams) => {
+﻿window.RenderDiagrams = (diagrams) => {
     am4core.useTheme(am4themes_material);
-    var container = document.getElementById("diagram-container");
+    let container = document.getElementById("diagram-container");
     container.innerHTML = "";
 
     for (var d = 0; d < diagrams.length; d++) {
