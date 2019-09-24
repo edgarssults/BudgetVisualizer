@@ -97,6 +97,11 @@ namespace Ed.BudgetVisualizer.Logic
                         To = "Budget",
                         Value = diff * -1,
                     });
+                    savings.Add(0);
+                }
+                else
+                {
+                    savings.Add(0);
                 }
 
                 diagrams.Add(diagram);

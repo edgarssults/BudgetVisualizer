@@ -24,6 +24,7 @@ namespace Ed.BudgetVisualizer.Test
                     Origin = "Test",
                     Description = "Test",
                     Date = new DateTime(2019, 10, 1),
+                    Category = "Category 1",
                 },
                 new Transaction
                 {
@@ -35,6 +36,7 @@ namespace Ed.BudgetVisualizer.Test
                     Origin = "Test",
                     Description = "Test",
                     Date = new DateTime(2019, 11, 1),
+                    Category = "Category 1",
                 },
                 new Transaction
                 {
@@ -46,12 +48,13 @@ namespace Ed.BudgetVisualizer.Test
                     Origin = "Test",
                     Description = "Test",
                     Date = new DateTime(2019, 10, 2),
+                    Category = "Category 2",
                 },
             };
 
-            List<Diagram> result = transactions.ToDiagramModel();
+            DiagramViewModel result = transactions.ToDiagramModel();
 
-            result.Count.Should().Be(2);
+            result.Diagrams.Count.Should().Be(2);
         }
     }
 }
