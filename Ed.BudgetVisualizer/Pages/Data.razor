@@ -1,6 +1,6 @@
 ﻿@page "/data"
 
-@inject Ed.BudgetVisualizer.Logic.IParser Parser
+@inject Ed.BudgetVisualizer.Logic.ParserLogic Parser
 @inject LocalStorage Storage
 @inject HttpClient Http
 
@@ -11,15 +11,18 @@
         <InputFile OnChange="OnFileSelection" UnmatchedParameters="inputFileParameters" />
         <label class="custom-file-label">Choose a CSV file to import transactions from</label>
     </div>
-    <div class="input-group-append">
-        <button type="button" class="btn btn-danger" @onclick="OnClearStorage">Clear Storage</button>
-    </div>
-    @if (Transactions != null && Transactions.Any())
+</div>
+<div class="btn-group mb-3" role="group">
+    @if (Transactions.IsAny())
     {
-        <div class="input-group-append">
-            <button type="button" class="btn btn-success" @onclick="OnRefreshCategories">Refresh Categories</button>
-        </div>
+        <button type="button" class="btn btn-success" @onclick="OnRefreshCategories">Refresh Categories</button>
+        <button type="button" class="btn btn-warning" @onclick="OnArchiveTransactions">Archive Transactions</button>
     }
+    @if (ArchivedTransactions.IsAny())
+    {
+        <button type="button" class="btn btn-warning" @onclick="OnUnArchiveTransactions">Un-archive Transactions</button>
+    }
+    <button type="button" class="btn btn-danger" @onclick="OnClearStorage">Clear Storage</button>
 </div>
 
 @if (!string.IsNullOrEmpty(status))
@@ -29,12 +32,15 @@
     </div>
 }
 
-@if (Transactions != null && Transactions.Any())
+@if (Transactions != null && ArchivedTransactions != null)
 {
     <div class="alert alert-info" role="alert">
-        Storage contains @Transactions.Count transaction(s).
+        Storage contains @Transactions.Count transaction(s) and @ArchivedTransactions.Count archived transaction(s).
     </div>
+}
 
+@if (Transactions.IsAny())
+{
     <table class="table transactions">
         <thead>
             <tr>
@@ -71,7 +77,9 @@
 @code {
     private string status;
     private string key = "transactions";
+    private string archiveKey = "archive";
     private List<Transaction> Transactions;
+    private List<Transaction> ArchivedTransactions;
 
     /// <summary>
     /// Additional parameters for the file upload control.
@@ -87,14 +95,18 @@
     /// </summary>
     protected override async Task OnInitializedAsync()
     {
-        // Load stored transactions
         Transactions = await Storage.GetItem<List<Transaction>>(key);
-
-        // If there aren't any, initialize the storage
         if (Transactions == null)
         {
             await Storage.SetItem<List<Transaction>>(key, new List<Transaction>());
             Transactions = await Storage.GetItem<List<Transaction>>(key);
+        }
+
+        ArchivedTransactions = await Storage.GetItem<List<Transaction>>(archiveKey);
+        if (ArchivedTransactions == null)
+        {
+            await Storage.SetItem<List<Transaction>>(archiveKey, new List<Transaction>());
+            ArchivedTransactions = await Storage.GetItem<List<Transaction>>(archiveKey);
         }
     }
 
@@ -110,11 +122,10 @@
         // Parse transactions and add them to the transaction list
         foreach (var file in files)
         {
-            // TODO: Support more CSV formats
             List<Transaction> parsedTransactions = await Parser.ParseFile(file.Data);
             if (parsedTransactions.Any())
             {
-                Parser.UpdateTransactionCategories(parsedTransactions, categories);
+                ParserLogic.UpdateTransactionCategories(parsedTransactions, categories);
                 Transactions.AddRange(parsedTransactions);
                 parsedTransactionCount += parsedTransactions.Count;
             }
@@ -176,8 +187,24 @@
     private async Task OnRefreshCategories()
     {
         List<Category> categories = await Http.GetJsonAsync<List<Category>>("data/categories.json");
-        Parser.UpdateTransactionCategories(Transactions, categories);
+        ParserLogic.UpdateTransactionCategories(Transactions, categories);
         await Storage.SetItem<List<Transaction>>(key, Transactions);
         status = $"Categories refreshed. App had {categories.Count} category filters in the database.";
+    }
+
+    private async Task OnArchiveTransactions()
+    {
+        ArchivedTransactions.AddRange(Transactions);
+        await Storage.SetItem<List<Transaction>>(archiveKey, ArchivedTransactions);
+        Transactions.Clear();
+        await Storage.SetItem<List<Transaction>>(key, Transactions);
+    }
+
+    private async Task OnUnArchiveTransactions()
+    {
+        Transactions.AddRange(ArchivedTransactions);
+        await Storage.SetItem<List<Transaction>>(key, Transactions);
+        ArchivedTransactions.Clear();
+        await Storage.SetItem<List<Transaction>>(archiveKey, ArchivedTransactions);
     }
 }

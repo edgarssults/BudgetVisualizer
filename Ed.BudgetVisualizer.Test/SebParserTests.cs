@@ -1,4 +1,4 @@
-using Ed.BudgetVisualizer.Logic;
+using Ed.BudgetVisualizer.Logic.Parsers;
 using Ed.BudgetVisualizer.Models;
 using FluentAssertions;
 using System.Collections.Generic;
@@ -16,18 +16,6 @@ namespace Ed.BudgetVisualizer.Test
         public SebParserTests()
         {
             _target = new SebParser();
-        }
-
-        [Theory]
-        [CsvFileData(@"Resources\TestData.csv")]
-        public async Task ParseFile_Works(Stream stream)
-        {
-            List<Transaction> results = await _target.ParseFile(stream);
-
-            results.Should().NotBeNull();
-            results.Count.Should().Be(5);
-            results.Count(t => t.IsDebit).Should().Be(4);
-            results.Count(t => t.IsCredit).Should().Be(1);
         }
     }
 }

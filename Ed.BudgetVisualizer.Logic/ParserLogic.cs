@@ -1,4 +1,5 @@
-﻿using Ed.BudgetVisualizer.Models;
+﻿using Ed.BudgetVisualizer.Logic.Parsers;
+using Ed.BudgetVisualizer.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,33 +10,19 @@ using System.Threading.Tasks;
 namespace Ed.BudgetVisualizer.Logic
 {
     /// <summary>
-    /// SEB bank transaction history parsing implementation.
+    /// Transaction history parsing logic.
     /// </summary>
-    public class SebParser : IParser
+    public class ParserLogic
     {
-        /// <summary>
-        /// Whether the transaction history has a title row.
-        /// </summary>
-        public bool HasTitleRow => true;
-
-        /// <summary>
-        /// Whether the transaction history has a header row.
-        /// </summary>
-        public bool HasHeaderRow => true;
-
-        /// <summary>
-        /// Column separator.
-        /// </summary>
-        public char Separator => ';';
-
         /// <summary>
         /// Parses a file data stream and outputs a list of transactions.
         /// </summary>
         /// <param name="data">File data stream.</param>
-        public async Task<List<Transaction>> ParseFile(Stream data) 
+        public async Task<List<Transaction>> ParseFile(Stream data)
         {
             // TODO: Exception feedback to UI
 
+            IParser parser = null;
             var transactions = new List<Transaction>();
             int lineNumber = 0;
             string line;
@@ -46,41 +33,51 @@ namespace Ed.BudgetVisualizer.Logic
                 {
                     lineNumber++;
 
+                    // TODO: Make parser selection nicer
+                    if (lineNumber == 1)
+                    {
+                        if (Regex.IsMatch(line, SebParser.FirstLineRegex))
+                        {
+                            parser = new SebParser();
+                        }
+                        else if (Regex.IsMatch(line, SwedbankParser.FirstLineRegex))
+                        {
+                            parser = new SwedbankParser();
+                        }
+                        else
+                        {
+                            throw new NotSupportedException("CSV format not recognized and not supported.");
+                        }
+                    }
+
                     if (string.IsNullOrEmpty(line))
                     {
                         continue;
                     }
 
-                    if (HasTitleRow && lineNumber == 1)
+                    if (parser.HasTitleRow && lineNumber == 1)
                     {
                         continue;
                     }
 
-                    if (HasHeaderRow && lineNumber == 1)
+                    if (parser.HasHeaderRow && lineNumber == 1)
                     {
                         continue;
                     }
 
-                    if (HasTitleRow && HasHeaderRow && lineNumber == 2)
+                    if (parser.HasTitleRow && parser.HasHeaderRow && lineNumber == 2)
                     {
                         continue;
                     }
 
                     try
                     {
-                        string[] fields = SplitAndClean(line);
-                        var transaction = new Transaction
+                        string[] fields = SplitAndClean(line, parser.Separator);
+                        var transaction = parser.MapTransaction(fields);
+                        if (transaction != null)
                         {
-                            Date = DateTime.Parse(fields[1]),
-                            Origin = fields[4],
-                            Description = fields[9],
-                            IsDebit = fields[14] == "D",
-                            IsCredit = fields[14] == "C",
-                            Sum = decimal.Parse(fields[15]),
-                            Currency = fields[17],
-                        };
-                        transaction.Category = transaction.IsCredit ? "Other Income" : "Other Expense";
-                        transactions.Add(transaction);
+                            transactions.Add(transaction);
+                        }
                     }
                     catch (ApplicationException ex)
                     {
@@ -93,32 +90,11 @@ namespace Ed.BudgetVisualizer.Logic
         }
 
         /// <summary>
-        /// Splits a line into fields and cleans each field from surrounding double quotes.
-        /// </summary>
-        /// <param name="line">Line to split and clean.</param>
-        private string[] SplitAndClean(string line)
-        {
-            var fields = new List<string>();
-
-            // Match either fields surrounded in quotes or fields without quotes
-            // Both fields end with the separator
-            foreach (Match match in Regex.Matches(line, $"(?:\"(.*?)\"|(\\d+.*?)){Separator}"))
-            {
-                // Add whichever group matched
-                fields.Add(!string.IsNullOrEmpty(match.Groups[1].ToString())
-                    ? match.Groups[1].ToString().Trim()
-                    : match.Groups[2].ToString().Trim());
-            }
-
-            return fields.ToArray();
-        }
-
-        /// <summary>
         /// Determines each transaction's category from a list of available categories.
         /// </summary>
         /// <param name="transactions">Transaction list.</param>
         /// <param name="categories">Category list.</param>
-        public void UpdateTransactionCategories(List<Transaction> transactions, List<Category> categories)
+        public static void UpdateTransactionCategories(List<Transaction> transactions, List<Category> categories)
         {
             foreach (var transaction in transactions)
             {
@@ -139,6 +115,28 @@ namespace Ed.BudgetVisualizer.Logic
                     transaction.Category = transaction.IsCredit ? "Other Income" : "Other Expense";
                 }
             }
+        }
+
+        /// <summary>
+        /// Splits a line into fields and cleans each field from surrounding double quotes.
+        /// </summary>
+        /// <param name="line">Line to split and clean.</param>
+        /// <param name="separator">Separator character.</param>
+        private string[] SplitAndClean(string line, char separator)
+        {
+            var fields = new List<string>();
+
+            // Match either fields surrounded in quotes or fields without quotes
+            // Both fields end with the separator
+            foreach (Match match in Regex.Matches(line, $"(?:\"(.*?)\"|(\\d+.*?)){separator}"))
+            {
+                // Add whichever group matched
+                fields.Add(!string.IsNullOrEmpty(match.Groups[1].ToString())
+                    ? match.Groups[1].ToString().Trim()
+                    : match.Groups[2].ToString().Trim());
+            }
+
+            return fields.ToArray();
         }
     }
 }

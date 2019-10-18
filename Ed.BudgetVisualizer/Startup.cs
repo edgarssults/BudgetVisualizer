@@ -8,7 +8,7 @@ namespace Ed.BudgetVisualizer
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<Logic.IParser, Logic.SebParser>(); // TODO: More parsers
+            services.AddSingleton<Logic.ParserLogic, Logic.ParserLogic>();
             services.AddStorage();
         }
 

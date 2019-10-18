@@ -113,5 +113,15 @@ namespace Ed.BudgetVisualizer.Logic
                 MonthlySavingsAverage = savings.Average(),
             };
         }
+
+        /// <summary>
+        /// Determines whether the IEnumerable is not null and not empty.
+        /// </summary>
+        /// <param name="obj">The IEnumerable to check.</param>
+        /// <returns>True if IEnumerable isn't null or empty.</returns>
+        public static bool IsAny(this IEnumerable<object> obj)
+        {
+            return obj != null && obj.Any();
+        }
     }
 }
