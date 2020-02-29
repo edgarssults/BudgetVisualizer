@@ -16,6 +16,10 @@
     "DescriptionRegex": "RIMI"
   },
   {
+    "Name": "Groceries",
+    "DescriptionRegex": "Rimi"
+  },
+  {
     "Name": "Mortgage",
     "DescriptionRegex": "Līg. VZ15016"
   },
@@ -36,6 +40,10 @@
     "DescriptionRegex": "DEEZER"
   },
   {
+    "Name": "Media",
+    "DescriptionRegex": "G2ACOMLIMIT"
+  },
+  {
     "Name": "Groceries",
     "DescriptionRegex": "NARVESEN"
   },
@@ -52,6 +60,10 @@
     "DescriptionRegex": "TVM Jugla"
   },
   {
+    "Name": "Transport",
+    "DescriptionRegex": "TVM Radio"
+  },
+  {
     "Name": "Entertainment",
     "DescriptionRegex": "MICROSOFT XBOX"
   },
@@ -66,6 +78,10 @@
   {
     "Name": "Lunch",
     "DescriptionRegex": "KAFE 1919"
+  },
+  {
+    "Name": "Lunch",
+    "DescriptionRegex": "N00057 Rigas Vecpilset"
   },
   {
     "Name": "Lunch",
@@ -120,8 +136,16 @@
     "OriginRegex": "BITE LATVIJA SIA"
   },
   {
+    "Name": "Utilities",
+    "DescriptionRegex": "mans.lmt.lv"
+  },
+  {
     "Name": "Restaurants",
     "DescriptionRegex": "TALLINAS PAGALMS"
+  },
+  {
+    "Name": "Insurance",
+    "OriginRegex": "COMPENSA"
   },
   {
     "Name": "Restaurants",
@@ -134,6 +158,10 @@
   {
     "Name": "Salary",
     "OriginRegex": "STARPTAUTISKĀ LIDOSTA RĪGA"
+  },
+  {
+    "Name": "Salary",
+    "OriginRegex": ".ENCONTROL BALTIC. SIA"
   },
   {
     "Name": "Groceries",
@@ -154,6 +182,10 @@
   {
     "Name": "Transactions",
     "OriginRegex": "Andra Āboliņa"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "ZABE DAIGA"
   },
   {
     "Name": "Transactions",
@@ -261,6 +293,10 @@
   },
   {
     "Name": "Entertainment",
+    "DescriptionRegex": "REAL QUEST"
+  },
+  {
+    "Name": "Entertainment",
     "DescriptionRegex": "APOLLO KINO"
   },
   {
@@ -285,6 +321,14 @@
   },
   {
     "Name": "Restaurants",
+    "DescriptionRegex": "BURGER STUDIO"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": " NEO "
+  },
+  {
+    "Name": "Restaurants",
     "DescriptionRegex": "Wolt"
   },
   {
@@ -293,7 +337,39 @@
   },
   {
     "Name": "Shopping",
+    "DescriptionRegex": "www.1a.lv"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "ZIEDU TIRGOTAVA LAKSTO"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "SANEL"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "VALTERS UN RAPA"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "KOPA5 SIA"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "VISS BALETAM"
+  },
+  {
+    "Name": "Shopping",
     "DescriptionRegex": "Meimelin"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "IXIS"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "DENIM DREAM"
   },
   {
     "Name": "Shopping",
@@ -309,6 +385,26 @@
   },
   {
     "Name": "Restaurants",
+    "DescriptionRegex": "BABY BACK RIBS"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "LOCALE/RIGA"
+  },
+  {
+    "Name": "Lunch",
+    "DescriptionRegex": "KFC AUDEJU"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": " NBD "
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "Iru krogs"
+  },
+  {
+    "Name": "Restaurants",
     "DescriptionRegex": "PICA LULU"
   },
   {
@@ -320,8 +416,16 @@
     "DescriptionRegex": "VEIKALS NR.1"
   },
   {
+    "Name": "Shopping",
+    "DescriptionRegex": "RESTKRASTA"
+  },
+  {
     "Name": "Groceries",
     "DescriptionRegex": "SIA BRAVO"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "Gastronome"
   },
   {
     "Name": "Transport",
@@ -377,6 +481,10 @@
   },
   {
     "Name": "Tax",
+    "OriginRegex": "LR IEM PILSONĪBAS UN MIGRĀCIJA"
+  },
+  {
+    "Name": "Tax",
     "OriginRegex": "Rīgas pilsētas pašvaldība"
   },
   {
@@ -390,6 +498,10 @@
   {
     "Name": "Restaurants",
     "DescriptionRegex": "Subway"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "Brooklyn Pub"
   },
   {
     "Name": "Restaurants",
@@ -414,6 +526,10 @@
   {
     "Name": "Restaurants",
     "DescriptionRegex": "Ezitis"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "ezitis"
   },
   {
     "Name": "Restaurants",
@@ -508,8 +624,16 @@
     "DescriptionRegex": "Cinamon Alfa"
   },
   {
+    "Name": "Entertainment",
+    "DescriptionRegex": "cinamonkino"
+  },
+  {
     "Name": "Clothes",
     "DescriptionRegex": "Karkade"
+  },
+  {
+    "Name": "Clothes",
+    "DescriptionRegex": "HUMANA"
   },
   {
     "Name": "Medical",
@@ -564,6 +688,10 @@
     "DescriptionRegex": "PAKISTANAS KEB"
   },
   {
+    "Name": "Restaurants",
+    "DescriptionRegex": "PILSKALNS/BROCENU NOVAD"
+  },
+  {
     "Name": "Transport",
     "DescriptionRegex": "BOLT.EU"
   },
@@ -594,6 +722,10 @@
   {
     "Name": "Transactions",
     "OriginRegex": "Klāvs Lībeks"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "BEĀTE KAZAINE"
   },
   {
     "Name": "Insurance",
@@ -870,6 +1002,10 @@
   {
     "Name": "Media",
     "DescriptionRegex": "MSFT AZURE"
+  },
+  {
+    "Name": "Media",
+    "DescriptionRegex": "DIGITALRIVE"
   },
   {
     "Name": "Restaurants",
