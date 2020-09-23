@@ -62,7 +62,7 @@
         <tbody>
             @foreach (var t in Transactions)
             {
-                <tr class="@GetTransactionClass(t.Sum)">
+                <tr class="@GetTransactionClass(t.Sum, t.IsCredit)">
                     <th scope="row">@t.Date.ToShortDateString()</th>
                     <td>@(t.IsCredit ? "C" : "D")</td>
                     <td class="nobreak">@t.Currency @t.Sum.ToString("N2")</td>
@@ -171,18 +171,24 @@
     /// Gets a Bootstrap class to use for the transaction row depending on the sum.
     /// </summary>
     /// <param name="sum">The transaction sum.</param>
-    private string GetTransactionClass(decimal sum)
+    /// <param name="isCredit">Indicates whether the transaction is credit, otherwise debit.</param>
+    private string GetTransactionClass(decimal sum, bool isCredit)
     {
         // TODO: Make this more dynamic or configurable
 
-        if (sum > 100)
+        if (!isCredit && sum > 100)
         {
             return "table-danger";
         }
 
-        if (sum > 50)
+        if (!isCredit && sum > 50)
         {
             return "table-warning";
+        }
+
+        if (isCredit)
+        {
+            return "table-success";
         }
 
         return string.Empty;
