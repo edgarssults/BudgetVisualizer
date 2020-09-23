@@ -15,7 +15,13 @@
 <div class="btn-group mb-3" role="group">
     @if (Transactions.IsAny())
     {
-        <button type="button" class="btn btn-success" @onclick="OnRefreshCategories">Refresh Categories</button>
+        <button type="button" class="btn btn-success" @onclick="OnRefreshCategories" disabled="@categoriesRefreshing">
+            @if (categoriesRefreshing)
+            {
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            }
+            Refresh Categories
+        </button>
         <button type="button" class="btn btn-warning" @onclick="OnArchiveTransactions">Archive Transactions</button>
     }
     @if (ArchivedTransactions.IsAny())
@@ -78,6 +84,7 @@
     private string status;
     private string key = "transactions";
     private string archiveKey = "archive";
+    private bool categoriesRefreshing = false;
     private List<Transaction> Transactions;
     private List<Transaction> ArchivedTransactions;
 
@@ -186,10 +193,12 @@
     /// </summary>
     private async Task OnRefreshCategories()
     {
+        categoriesRefreshing = true;
         List<Category> categories = await Http.GetJsonAsync<List<Category>>("data/categories.json");
         ParserLogic.UpdateTransactionCategories(Transactions, categories);
         await Storage.SetItem<List<Transaction>>(key, Transactions);
         status = $"Categories refreshed. App had {categories.Count} category filters in the database.";
+        categoriesRefreshing = false;
     }
 
     private async Task OnArchiveTransactions()
