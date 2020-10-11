@@ -28,6 +28,10 @@
     "DescriptionRegex": "ESERS PLUS, BRIVIBAS/RIGA/LV"
   },
   {
+    "Name": "Entertainment",
+    "DescriptionRegex": "Rundales pils muzejs"
+  },
+  {
     "Name": "Furniture",
     "DescriptionRegex": "IKEA"
   },
@@ -66,6 +70,14 @@
   {
     "Name": "Entertainment",
     "DescriptionRegex": "MICROSOFT XBOX"
+  },
+  {
+    "Name": "Entertainment",
+    "DescriptionRegex": "Microsoft\\*Xbox"
+  },
+  {
+    "Name": "Entertainment",
+    "DescriptionRegex": "PAYPAL \\*ENEBA"
   },
   {
     "Name": "Entertainment",
@@ -169,6 +181,14 @@
   },
   {
     "Name": "Restaurants",
+    "DescriptionRegex": "Restorans Baltvilla"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "Balta maja"
+  },
+  {
+    "Name": "Restaurants",
     "DescriptionRegex": "KAFEJNICA- BEKKO"
   },
   {
@@ -221,6 +241,10 @@
   },
   {
     "Name": "Cash",
+    "OriginRegex": "LUMINOR"
+  },
+  {
+    "Name": "Cash",
     "DescriptionRegex": "NAUDAS IZSN."
   },
   {
@@ -250,6 +274,14 @@
   {
     "Name": "Shopping",
     "OriginRegex": "DĀVANU SALA SIA"
+  },
+  {
+    "Name": "Shopping",
+    "OriginRegex": "TRUSTLY GROUP"
+  },
+  {
+    "Name": "Shopping",
+    "OriginRegex": "bm.market"
   },
   {
     "Name": "Transactions",
@@ -294,6 +326,10 @@
   {
     "Name": "Restaurants",
     "DescriptionRegex": "MCDONALDS"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "Hesburger"
   },
   {
     "Name": "Transport",
@@ -348,12 +384,24 @@
     "DescriptionRegex": "CCP GAMES"
   },
   {
+    "Name": "Entertainment",
+    "DescriptionRegex": "CINAMON ALFA"
+  },
+  {
     "Name": "Shoppping",
     "DescriptionRegex": "PITNEYBOWES"
   },
   {
     "Name": "Shoppping",
     "DescriptionRegex": "DAN EBAY"
+  },
+  {
+    "Name": "Shoppping",
+    "DescriptionRegex": "RIGA PLAZA-VEIKALS"
+  },
+  {
+    "Name": "Shoppping",
+    "DescriptionRegex": "KSenuka"
   },
   {
     "Name": "Entertainment",
@@ -493,6 +541,10 @@
   },
   {
     "Name": "Revolut",
+    "DescriptionRegex": "REVO\\*EdgarsSults"
+  },
+  {
+    "Name": "Revolut",
     "DescriptionRegex": "Revolut"
   },
   {
@@ -506,6 +558,10 @@
   {
     "Name": "Groceries",
     "DescriptionRegex": "SIA BRAVO"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "Pizza /Mukusalas"
   },
   {
     "Name": "Groceries",
@@ -617,6 +673,10 @@
   },
   {
     "Name": "Travel",
+    "DescriptionRegex": "Viesnica \"\"Baltvilla\"\""
+  },
+  {
+    "Name": "Travel",
     "OriginRegex": "Jūrmeži"
   },
   {
@@ -642,6 +702,10 @@
   {
     "Name": "Restaurants",
     "DescriptionRegex": "EZITIS"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "KRODZINS SVEIKS"
   },
   {
     "Name": "Restaurants",
@@ -674,6 +738,10 @@
   {
     "Name": "Shopping",
     "DescriptionRegex": "MOOMIN SHOP"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "AIRSOFTA VEIKALS"
   },
   {
     "Name": "Shopping",
@@ -846,6 +914,10 @@
   {
     "Name": "Restaurants",
     "DescriptionRegex": "PAKISTANAS KEB"
+  },
+  {
+    "Name": "Restaurants",
+    "DescriptionRegex": "KEST-RESTORANS"
   },
   {
     "Name": "Restaurants",
@@ -1254,6 +1326,10 @@
   {
     "Name": "Transport",
     "DescriptionRegex": "Dzelmes DUS"
+  },
+  {
+    "Name": "Transport",
+    "DescriptionRegex": "VIRSI DUS"
   },
   {
     "Name": "Transport",
