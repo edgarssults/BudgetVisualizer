@@ -4,6 +4,14 @@
     "OriginRegex": "AS LATVENERGO"
   },
   {
+    "Name": "Utilities",
+    "OriginRegex": "LATVENERGO"
+  },
+  {
+    "Name": "Utilities",
+    "OriginRegex": "AS Latvenergo"
+  },
+  {
     "Name": "Rent",
     "OriginRegex": "SIA \"HAUSMASTER\""
   },
@@ -14,6 +22,10 @@
   {
     "Name": "Groceries",
     "DescriptionRegex": "RIMI"
+  },
+  {
+    "Name": "Groceries",
+    "DescriptionRegex": "LIDL"
   },
   {
     "Name": "Groceries",
@@ -78,6 +90,10 @@
   {
     "Name": "Entertainment",
     "DescriptionRegex": "PAYPAL \\*ENEBA"
+  },
+  {
+    "Name": "Shopping",
+    "DescriptionRegex": "PAYPAL \\*EBAY"
   },
   {
     "Name": "Entertainment",
@@ -176,6 +192,10 @@
     "OriginRegex": "LMT SIA"
   },
   {
+    "Name": "Utilities",
+    "OriginRegex": "LATVIJAS MOBILAIS TELEFONS SIA"
+  },
+  {
     "Name": "Restaurants",
     "DescriptionRegex": "TALLINAS PAGALMS"
   },
@@ -258,6 +278,22 @@
   {
     "Name": "Transactions",
     "OriginRegex": "ZABE DAIGA"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "DĀRTA KALMUKA"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "JĀNIS GUDERMANIS"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "GUNNARSSONE ALISE"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "ŅIKITA OMEĻJANOVIČS"
   },
   {
     "Name": "Transactions",
@@ -637,6 +673,10 @@
   },
   {
     "Name": "Tax",
+    "DescriptionRegex": "Iedzīvotāju ienākuma nodoklis no procentiem"
+  },
+  {
+    "Name": "Tax",
     "OriginRegex": "LR IEM PILSONĪBAS UN MIGRĀCIJA"
   },
   {
@@ -658,6 +698,10 @@
   {
     "Name": "Restaurants",
     "DescriptionRegex": "Subway"
+  },
+  {
+    "Name": "Restaurants",
+    "OriginRegex": "SubWay"
   },
   {
     "Name": "Restaurants",
@@ -970,6 +1014,14 @@
   {
     "Name": "Transactions",
     "OriginRegex": "Klāvs Lībeks"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "Mihails Popovs"
+  },
+  {
+    "Name": "Transactions",
+    "OriginRegex": "Ingemārs Priedulājs"
   },
   {
     "Name": "Transactions",
@@ -1478,5 +1530,229 @@
   {
     "Name": "Clothing",
     "DescriptionRegex": "Zapping Milano"
+  },
+  {
+    "Name": "Restaurants",
+    "OriginRegex": "Street Food Sala"
+  },
+  {
+    "Name": "Transport",
+    "OriginRegex": "Mobilly"
+  },
+  {
+    "Name": "Entertainment",
+    "OriginRegex": "SPOTIFY"
+  },
+  {
+    "Name": "Donations",
+    "OriginRegex": "STOPIFY"
+  },
+  {
+    "Name": "Entertainment",
+    "OriginRegex": "Blizzard"
+  },
+  {
+    "Name": "Restaurants",
+    "OriginRegex": "Bolt"
+  },
+  {
+    "Name": "Utilities",
+    "OriginRegex": "balticom"
+  },
+  {
+    "Name": "Car Lease",
+    "OriginRegex": "Citadele Leasing"
+  },
+  {
+    "Name": "Insurance",
+    "OriginRegex": "BALTIJAS APDROŠINĀŠANAS NAMS"
+  },
+  {
+    "Name": "Insurance",
+    "OriginRegex": "BTA BALTIC INSURANCE COMPANY"
+  },
+  {
+    "Name": "Insurance",
+    "OriginRegex": "APDROŠINĀŠANAS AKCIJU SABIEDRĪBA"
+  },
+  {
+    "Name": "Restaurants",
+    "OriginRegex": "BoomCafe"
+  },
+  {
+    "Name": "Entertainment",
+    "OriginRegex": "Mazais abonements"
+  },
+  {
+    "Name": "Utilities",
+    "OriginRegex": "Vestabalt Jums SIA"
+  },
+  {
+    "Name": "Utilities",
+    "OriginRegex": "SIA VESTABALT Jums"
+  },
+  {
+    "Name": "Lunch",
+    "OriginRegex": "Late Night Munchies"
+  },
+  {
+    "Name": "Shopping",
+    "OriginRegex": "Evelatus-veikals"
+  },
+  {
+    "Name": "Shopping",
+    "OriginRegex": "Randoms-Veikals"
+  },
+  {
+    "Name": "Shopping",
+    "OriginRegex": "JYSK"
+  },
+  {
+    "Name": "Utilities",
+    "OriginRegex": "CR-APSAIMNIEKOŠANA"
+  },
+  {
+    "Name": "Utilities",
+    "OriginRegex": "AS LATVIJAS GĀZE"
+  },
+  {
+    "Name": "Entertainment",
+    "OriginRegex": "YouTubePremium"
+  },
+  {
+    "Name": "Lunch",
+    "OriginRegex": "Alus seta"
+  },
+  {
+    "Name": "Clothing",
+    "OriginRegex": "X JEANS"
+  },
+  {
+    "Name": "Clothing",
+    "OriginRegex": "LV 6112212 HOUSE"
+  },
+  {
+    "Name": "Restaurants",
+    "OriginRegex": "Moonbarcatering"
+  },
+  {
+    "Name": "Entertainment",
+    "OriginRegex": "Ziemas Gaismas darzs"
+  },
+  {
+    "Name": "Medical",
+    "OriginRegex": "SIA DENTAPLAN"
+  },
+  {
+    "Name": "Restaurants",
+    "OriginRegex": "Aston Hotel Riga"
+  },
+  {
+    "Name": "Clothing",
+    "OriginRegex": "TOMMY HILFIGER DOMINA"
+  },
+  {
+    "Name": "Clothing",
+    "OriginRegex": "Peek & Cloppenburg"
+  },
+  {
+    "Name": "Hotel",
+    "OriginRegex": "TERVISE PA"
+  },
+  {
+    "Name": "Lunch",
+    "OriginRegex": "LAGE GA"
+  },
+  {
+    "Name": "Entertainment",
+    "OriginRegex": "DOMS-HERDERA LAUKUMS"
+  },
+  {
+    "Name": "Beauty",
+    "OriginRegex": "OWL BEAUTY"
+  },
+  {
+    "Name": "Restaurants",
+    "OriginRegex": "LATER LTD SIA"
+  },
+  {
+    "Name": "Restaurants",
+    "OriginRegex": "LUX FOOD SIA"
+  },
+  {
+    "Name": "Shopping",
+    "OriginRegex": "0000000000HKGHKG"
+  },
+  {
+    "Name": "Medical",
+    "OriginRegex": "Klinika EGV"
+  },
+  {
+    "Name": "Medical",
+    "OriginRegex": "N09089 Riga, Juglas ie"
+  },
+  {
+    "Name": "Restaurants",
+    "OriginRegex": "Soraksan-restorans"
+  },
+  {
+    "Name": "Restaurants",
+    "OriginRegex": "Otra puse-atputas komp"
+  },
+  {
+    "Name": "Entertainment",
+    "OriginRegex": "TOWERRIGA"
+  },
+  {
+    "Name": "Lunch",
+    "OriginRegex": "Vinkalni Galerija Cent"
+  },
+  {
+    "Name": "Medical",
+    "OriginRegex": "BENU APTIEKA"
+  },
+  {
+    "Name": "Restaurants",
+    "OriginRegex": "KURSAS ZEME"
+  },
+  {
+    "Name": "Restaurants",
+    "OriginRegex": "Riverside 2"
+  },
+  {
+    "Name": "Shopping",
+    "OriginRegex": "Malko-Juglas"
+  },
+  {
+    "Name": "Restaurants",
+    "OriginRegex": "Burger King Riga Audej"
+  },
+  {
+    "Name": "Shopping",
+    "OriginRegex": "GALES NAMS"
+  },
+  {
+    "Name": "Entertainment",
+    "OriginRegex": "Thirsty"
+  },
+  {
+    "Name": "Shopping",
+    "OriginRegex": "Siguldas Perle"
+  },
+  {
+    "Name": "Entertainment",
+    "OriginRegex": "TAPROOM"
+  },
+  {
+    "Name": "Lunch",
+    "OriginRegex": "ZEEST"
+  },
+  {
+    "Name": "Transport",
+    "OriginRegex": "Kool-Ieriki"
+  },
+  {
+    "Name": "Entertainment",
+    "OriginRegex": "FOLKKLUBS ALA"
   }
 ]
