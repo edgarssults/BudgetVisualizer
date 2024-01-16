@@ -1,5 +1,6 @@
 ﻿using Ed.BudgetVisualizer.Models;
 using System;
+using System.Globalization;
 
 namespace Ed.BudgetVisualizer.Logic.Parsers
 {
@@ -34,9 +35,10 @@ namespace Ed.BudgetVisualizer.Logic.Parsers
         /// <param name="fields">Data fields to map.</param>
         public Transaction MapTransaction(string[] fields) 
         {
+            var lv = new CultureInfo("lv-LV");
             var transaction = new Transaction
             {
-                Date = DateTime.Parse(fields[1]),
+                Date = DateTime.Parse(fields[1], lv),
                 Origin = fields[4],
                 Description = fields[9],
                 IsDebit = fields[14] == "D",

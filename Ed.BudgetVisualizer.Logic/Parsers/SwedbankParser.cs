@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Ed.BudgetVisualizer.Models;
+using System;
+using System.Globalization;
 using System.Linq;
-using System.Text;
-using Ed.BudgetVisualizer.Models;
 
 namespace Ed.BudgetVisualizer.Logic.Parsers
 {
@@ -49,9 +48,10 @@ namespace Ed.BudgetVisualizer.Logic.Parsers
                 return null;
             }
 
+            var lv = new CultureInfo("lv-LV");
             var transaction = new Transaction
             {
-                Date = DateTime.Parse(fields[2]),
+                Date = DateTime.Parse(fields[2], lv),
                 Origin = fields[3],
                 Description = fields[4],
                 IsDebit = fields[7] == "D",
