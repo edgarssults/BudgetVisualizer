@@ -2,6 +2,7 @@
 
 @inject LocalStorage Storage
 @inject IJSRuntime JsRuntime
+@inject HttpClient Http
 
 <h1>Diagrams</h1>
 
@@ -20,12 +21,16 @@
     private string key = "transactions";
     private List<Transaction> Transactions;
     private DiagramViewModel Model;
+    private Dictionary<int, Category> Categories;
 
     /// <summary>
     /// Handles the component initialization event.
     /// </summary>
     protected override async Task OnInitializedAsync()
     {
+        Categories = (await Http.GetJsonAsync<List<Category>>("data/categories.json"))
+            .ToDictionary(key => key.CategoryId, val => val);
+
         // Load stored transactions
         Transactions = await Storage.GetItem<List<Transaction>>(key);
 
@@ -39,7 +44,7 @@
         // If there are transactions loaded, generate the diagrams
         if (Transactions.Any())
         {
-            Model = Transactions.ToDiagramModel();
+            Model = Transactions.ToDiagramModel(Categories);
             await JsRuntime.InvokeAsync<bool>("RenderDiagrams", Model.Diagrams);
         }
     }

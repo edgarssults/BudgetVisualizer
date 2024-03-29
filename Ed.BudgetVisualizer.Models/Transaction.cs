@@ -43,13 +43,13 @@ namespace Ed.BudgetVisualizer.Models
         public string Currency { get; set; }
 
         /// <summary>
-        /// Whether the transacrion is exclided from diagrams.
+        /// Whether the transacrion is excluded from diagrams.
         /// </summary>
         public bool IsExcluded { get; set; }
 
         /// <summary>
-        /// Transaction category name.
+        /// Transaction category identifier.
         /// </summary>
-        public string Category { get; set; }
+        public int CategoryId { get; set; }
     }
 }

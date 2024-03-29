@@ -24,7 +24,7 @@ namespace Ed.BudgetVisualizer.Test
                     Origin = "Test",
                     Description = "Test",
                     Date = new DateTime(2019, 10, 1),
-                    Category = "Category 1",
+                    CategoryId = 1,
                 },
                 new Transaction
                 {
@@ -36,7 +36,7 @@ namespace Ed.BudgetVisualizer.Test
                     Origin = "Test",
                     Description = "Test",
                     Date = new DateTime(2019, 11, 1),
-                    Category = "Category 1",
+                    CategoryId = 1,
                 },
                 new Transaction
                 {
@@ -48,11 +48,17 @@ namespace Ed.BudgetVisualizer.Test
                     Origin = "Test",
                     Description = "Test",
                     Date = new DateTime(2019, 10, 2),
-                    Category = "Category 2",
+                    CategoryId = 2,
                 },
             };
 
-            DiagramViewModel result = transactions.ToDiagramModel();
+            var catgories = new Dictionary<int, Category>
+            {
+                { 1, new Category { CategoryId = 1, Name = "Category 1 "} },
+                { 2, new Category { CategoryId = 2, Name = "Category 2 "} }
+            };
+
+            DiagramViewModel result = transactions.ToDiagramModel(catgories);
 
             result.Diagrams.Count.Should().Be(2);
         }

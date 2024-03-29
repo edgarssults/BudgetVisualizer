@@ -13,7 +13,8 @@ namespace Ed.BudgetVisualizer.Logic
         /// Transforms a list of transactions to a diagram model.
         /// </summary>
         /// <param name="transactions">Transaction list.</param>
-        public static DiagramViewModel ToDiagramModel(this List<Transaction> transactions)
+        /// <param name="categories">Category names.</param>
+        public static DiagramViewModel ToDiagramModel(this List<Transaction> transactions, Dictionary<int, Category> categories)
         {
             var diagrams = new List<Diagram>();
             var savings = new List<decimal>();
@@ -33,18 +34,18 @@ namespace Ed.BudgetVisualizer.Logic
                 };
 
                 // Group categories
-                var categories = month.Value
-                    .GroupBy(t => t.Category)
+                var groupedCategories = month.Value
+                    .GroupBy(t => t.CategoryId)
                     .ToDictionary(g => g.Key, g => g.ToList());
 
-                foreach (var category in categories)
+                foreach (var category in groupedCategories)
                 {
                     decimal categoryCreditSum = category.Value.Where(t => t.IsCredit).Sum(c => c.Sum);
                     if (categoryCreditSum > 0)
                     {
                         diagram.Links.Add(new LinkItem
                         {
-                            From = category.Key,
+                            From = categories[category.Key].Name,
                             To = "Budget",
                             Value = categoryCreditSum,
                         });
@@ -56,7 +57,7 @@ namespace Ed.BudgetVisualizer.Logic
                         diagram.Links.Add(new LinkItem
                         {
                             From = "Budget",
-                            To = category.Key,
+                            To = categories[category.Key].Name,
                             Value = categoryDebitSum,
                         });
                     }

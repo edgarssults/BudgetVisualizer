@@ -90,21 +90,21 @@ namespace Ed.BudgetVisualizer.Logic
         }
 
         /// <summary>
-        /// Determines each transaction's category from a list of available categories.
+        /// Determines each transaction's category from a list of available category matches.
         /// </summary>
         /// <param name="transactions">Transaction list.</param>
-        /// <param name="categories">Category list.</param>
-        public static void UpdateTransactionCategories(List<Transaction> transactions, List<Category> categories)
+        /// <param name="matches">Match list.</param>
+        public static void UpdateTransactionCategories(List<Transaction> transactions, List<Models.Match> matches)
         {
             foreach (var transaction in transactions)
             {
                 bool isSet = false;
-                foreach (var category in categories)
+                foreach (var match in matches)
                 {
-                    if ((!string.IsNullOrEmpty(category.OriginRegex) && Regex.IsMatch(transaction.Origin, category.OriginRegex))
-                        || (!string.IsNullOrEmpty(category.DescriptionRegex) && Regex.IsMatch(transaction.Description, category.DescriptionRegex)))
+                    if ((!string.IsNullOrEmpty(match.OriginRegex) && Regex.IsMatch(transaction.Origin, match.OriginRegex))
+                        || (!string.IsNullOrEmpty(match.DescriptionRegex) && Regex.IsMatch(transaction.Description, match.DescriptionRegex)))
                     {
-                        transaction.Category = category.Name;
+                        transaction.CategoryId = match.CategoryId;
                         isSet = true;
                         break;
                     }
@@ -112,7 +112,7 @@ namespace Ed.BudgetVisualizer.Logic
 
                 if (!isSet)
                 {
-                    transaction.Category = transaction.IsCredit ? "Other Income" : "Other Expense";
+                    transaction.CategoryId = transaction.IsCredit ? 101 : 102; // TODO: Enum
                 }
             }
         }
@@ -128,7 +128,7 @@ namespace Ed.BudgetVisualizer.Logic
 
             // Match either fields surrounded in quotes or fields without quotes
             // Both fields end with the separator
-            foreach (Match match in Regex.Matches(line, $"(?:\"(.*?)\"|(\\d+.*?)){separator}"))
+            foreach (System.Text.RegularExpressions.Match match in Regex.Matches(line, $"(?:\"(.*?)\"|(\\d+.*?)){separator}"))
             {
                 // Add whichever group matched
                 fields.Add(!string.IsNullOrEmpty(match.Groups[1].ToString())

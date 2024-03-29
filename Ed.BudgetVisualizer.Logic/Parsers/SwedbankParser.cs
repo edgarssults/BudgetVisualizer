@@ -59,7 +59,7 @@ namespace Ed.BudgetVisualizer.Logic.Parsers
                 Sum = decimal.Parse(fields[5].Replace(',', '.')),
                 Currency = fields[6],
             };
-            transaction.Category = transaction.IsCredit ? "Other Income" : "Other Expense";
+            transaction.CategoryId = transaction.IsCredit ? 101 : 102; // TODO: Enum
 
             return transaction;
         }
