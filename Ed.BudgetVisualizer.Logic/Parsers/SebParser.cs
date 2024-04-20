@@ -35,15 +35,14 @@ namespace Ed.BudgetVisualizer.Logic.Parsers
         /// <param name="fields">Data fields to map.</param>
         public Transaction MapTransaction(string[] fields) 
         {
-            var lv = new CultureInfo("lv-LV");
             var transaction = new Transaction
             {
-                Date = DateTime.Parse(fields[1], lv),
+                Date = DateTime.Parse(fields[1]), // LV date format
                 Origin = fields[4],
                 Description = fields[9],
                 IsDebit = fields[14] == "D",
                 IsCredit = fields[14] == "C",
-                Sum = decimal.Parse(fields[15]),
+                Sum = decimal.Parse(fields[15], CultureInfo.InvariantCulture), // LV uses "," as the decimal separator, but the CSV has "."
                 Currency = fields[17],
             };
             transaction.CategoryId = transaction.IsCredit ? 101 : 102; // TODO: Enum

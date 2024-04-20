@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29230.61
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ed.BudgetVisualizer", "Ed.BudgetVisualizer\Ed.BudgetVisualizer.csproj", "{55636DC6-6069-4F42-B05B-E42E02C93C1B}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ed.BudgetVisualizer.Models", "Ed.BudgetVisualizer.Models\Ed.BudgetVisualizer.Models.csproj", "{3E14FD31-3E99-4AAD-A5FD-DC00E87353F6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ed.BudgetVisualizer.Test", "Ed.BudgetVisualizer.Test\Ed.BudgetVisualizer.Test.csproj", "{170B91F2-93C0-4F06-BC7C-7295071E082A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ed.BudgetVisualizer.Net8", "Ed.BudgetVisualizer.Net8\Ed.BudgetVisualizer.Net8.csproj", "{3BC7944D-A1BD-45C6-8D6E-A558F94D0891}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{170B91F2-93C0-4F06-BC7C-7295071E082A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{170B91F2-93C0-4F06-BC7C-7295071E082A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{170B91F2-93C0-4F06-BC7C-7295071E082A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BC7944D-A1BD-45C6-8D6E-A558F94D0891}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BC7944D-A1BD-45C6-8D6E-A558F94D0891}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BC7944D-A1BD-45C6-8D6E-A558F94D0891}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BC7944D-A1BD-45C6-8D6E-A558F94D0891}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

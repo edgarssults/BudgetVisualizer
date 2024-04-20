@@ -10,6 +10,8 @@ namespace Ed.BudgetVisualizer.Logic.Parsers
     /// </summary>
     public class SwedbankParser : IParser
     {
+        private readonly CultureInfo _culture = new CultureInfo("lv-LV");
+
         /// <summary>
         /// Whether the transaction history has a title row.
         /// </summary>
@@ -48,10 +50,9 @@ namespace Ed.BudgetVisualizer.Logic.Parsers
                 return null;
             }
 
-            var lv = new CultureInfo("lv-LV");
             var transaction = new Transaction
             {
-                Date = DateTime.Parse(fields[2], lv),
+                Date = DateTime.Parse(fields[2], _culture),
                 Origin = fields[3],
                 Description = fields[4],
                 IsDebit = fields[7] == "D",

@@ -1,0 +1,134 @@
+[
+  {
+    "CategoryId": 101,
+    "Name": "Other Income"
+  },
+  {
+    "CategoryId": 102,
+    "Name": "Other Expense"
+  },
+  {
+    "CategoryId": 1001,
+    "Name": "Utilities"
+  },
+  {
+    "CategoryId": 1002,
+    "Name": "Rent"
+  },
+  {
+    "CategoryId": 1003,
+    "Name": "Groceries"
+  },
+  {
+    "CategoryId": 1004,
+    "Name": "Mortgage"
+  },
+  {
+    "CategoryId": 1005,
+    "Name": "Entertainment"
+  },
+  {
+    "CategoryId": 1006,
+    "Name": "Furniture"
+  },
+  {
+    "CategoryId": 1007,
+    "Name": "Insurance"
+  },
+  {
+    "CategoryId": 1008,
+    "Name": "Media"
+  },
+  {
+    "CategoryId": 1009,
+    "Name": "Transport"
+  },
+  {
+    "CategoryId": 1010,
+    "Name": "Shopping"
+  },
+  {
+    "CategoryId": 1011,
+    "Name": "Wedding"
+  },
+  {
+    "CategoryId": 1012,
+    "Name": "Banking"
+  },
+  {
+    "CategoryId": 1013,
+    "Name": "Lunch"
+  },
+  {
+    "CategoryId": 1014,
+    "Name": "Restaurants"
+  },
+  {
+    "CategoryId": 1016,
+    "Name": "Salary"
+  },
+  {
+    "CategoryId": 1017,
+    "Name": "Cash"
+  },
+  {
+    "CategoryId": 1018,
+    "Name": "Transactions"
+  },
+  {
+    "CategoryId": 1019,
+    "Name": "Medical"
+  },
+  {
+    "CategoryId": 1020,
+    "Name": "Hobbies"
+  },
+  {
+    "CategoryId": 1021,
+    "Name": "Hotels"
+  },
+  {
+    "CategoryId": 1022,
+    "Name": "Pension"
+  },
+  {
+    "CategoryId": 1023,
+    "Name": "Revolut"
+  },
+  {
+    "CategoryId": 1024,
+    "Name": "Leasing"
+  },
+  {
+    "CategoryId": 1025,
+    "Name": "Tax"
+  },
+  {
+    "CategoryId": 1026,
+    "Name": "Travel"
+  },
+  {
+    "CategoryId": 1027,
+    "Name": "Clothing"
+  },
+  {
+    "CategoryId": 1028,
+    "Name": "Car"
+  },
+  {
+    "CategoryId": 1029,
+    "Name": "Refund"
+  },
+  {
+    "CategoryId": 1030,
+    "Name": "Donations"
+  },
+  {
+    "CategoryId": 1031,
+    "Name": "Investments"
+  },
+  {
+    "CategoryId": 1032,
+    "Name": "Beauty"
+  }
+]

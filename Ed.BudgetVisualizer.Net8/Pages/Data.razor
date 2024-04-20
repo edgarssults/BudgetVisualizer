@@ -1,0 +1,224 @@
+﻿@page "/data"
+@inject HttpClient Http
+@inject Ed.BudgetVisualizer.Logic.ParserLogic Parser
+@inject Blazored.LocalStorage.ILocalStorageService Storage
+
+<PageTitle>Data</PageTitle>
+
+<h1>Data</h1>
+
+<div class="mb-3">
+    <label for="formFile" class="form-label">Choose a CSV file to import transactions from</label>
+    <InputFile OnChange="OnFileSelection" multiple class="form-control" />
+</div>
+
+<div class="btn-group mb-3" role="group">
+    @if (Transactions.IsAny())
+    {
+        <button type="button" class="btn btn-success" @onclick="OnRefreshCategories" disabled="@categoriesRefreshing">
+            @if (categoriesRefreshing)
+            {
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            }
+            Refresh Categories
+        </button>
+        <button type="button" class="btn btn-warning" @onclick="OnArchiveTransactions">Archive Transactions</button>
+    }
+    @if (ArchivedTransactions.IsAny())
+    {
+        <button type="button" class="btn btn-warning" @onclick="OnUnArchiveTransactions">Un-archive Transactions</button>
+    }
+    <button type="button" class="btn btn-danger" @onclick="OnClearStorage">Clear Storage</button>
+</div>
+
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-success" role="alert">
+        @status
+    </div>
+}
+
+@if (Transactions != null && ArchivedTransactions != null)
+{
+    <div class="alert alert-info" role="alert">
+        Storage contains @Transactions.Count transaction(s) and @ArchivedTransactions.Count archived transaction(s).
+    </div>
+}
+
+@if (Transactions.IsAny())
+{
+    <table class="table transactions">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Credit/Debit</th>
+                <th scope="col">Sum</th>
+                <th scope="col">Origin</th>
+                <th scope="col">Description</th>
+                <th scope="col">Category</th>
+                <th scope="col"><span class="oi oi-ban" title="Exclude transaction from diagram"></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var t in Transactions ?? [])
+            {
+                <tr class="@GetTransactionClass(t.Sum, t.IsCredit)">
+                    <th scope="row">@t.Date.ToShortDateString()</th>
+                    <td>@(t.IsCredit ? "C" : "D")</td>
+                    <td class="nobreak">@t.Currency @t.Sum.ToString("N2")</td>
+                    <td>@t.Origin</td>
+                    <td>@t.Description</td>
+                    <td>@Categories[t.CategoryId].Name</td>
+                    <td>
+                        <div class="form-check form-check-inline" title="Exclude transaction from diagram">
+                            <input type="checkbox" class="form-check-input position-static" checked="@t.IsExcluded" @onchange="async () => await OnToggleExcluded(t)" />
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private string? status;
+    private string key = "transactions";
+    private string archiveKey = "archive";
+    private bool categoriesRefreshing = false;
+    private List<Transaction>? Transactions;
+    private List<Transaction>? ArchivedTransactions = [];
+    private Dictionary<int, Category>? Categories = [];
+
+    /// <summary>
+    /// Handles the component initialization event.
+    /// </summary>
+    protected override async Task OnInitializedAsync()
+    {
+        Categories = (await Http.GetFromJsonAsync<List<Category>>("data/categories.json"))
+            ?.ToDictionary(key => key.CategoryId, val => val);
+
+        Transactions = await Storage.GetItemAsync<List<Transaction>>(key);
+        if (Transactions == null)
+        {
+            await Storage.SetItemAsync<List<Transaction>>(key, new List<Transaction>());
+            Transactions = await Storage.GetItemAsync<List<Transaction>>(key);
+        }
+
+        ArchivedTransactions = await Storage.GetItemAsync<List<Transaction>>(archiveKey);
+        if (ArchivedTransactions == null)
+        {
+            await Storage.SetItemAsync<List<Transaction>>(archiveKey, new List<Transaction>());
+            ArchivedTransactions = await Storage.GetItemAsync<List<Transaction>>(archiveKey);
+        }
+    }
+
+    /// <summary>
+    /// Handles the file selection event.
+    /// </summary>
+    /// <param name="e">File input arguments.</param>
+    private async Task OnFileSelection(InputFileChangeEventArgs e)
+    {
+        int parsedTransactionCount = 0;
+        var matches = await Http.GetFromJsonAsync<List<Match>>("data/matches.json");
+
+        // Parse transactions and add them to the transaction list
+        foreach (var file in e.GetMultipleFiles())
+        {
+            // var ms = new MemoryStream();
+            // await file.OpenReadStream().CopyToAsync(ms);
+            // ms.Position = 0;
+
+            var parsedTransactions = await Parser.ParseFile(file.OpenReadStream());
+            if (parsedTransactions.Any())
+            {
+                ParserLogic.UpdateTransactionCategories(parsedTransactions, matches);
+                Transactions?.AddRange(parsedTransactions);
+                parsedTransactionCount += parsedTransactions.Count;
+            }
+        }
+
+        // Update the transaction storage
+        if (parsedTransactionCount > 0)
+        {
+            await Storage.SetItemAsync<List<Transaction>?>(key, Transactions);
+        }
+
+        status = $"Imported {parsedTransactionCount} transaction(s) from {e.FileCount} file(s).";
+    }
+
+    /// <summary>
+    /// Handles transaction exclusion toggle event.
+    /// </summary>
+    /// <param name="transaction">The transaction to toggle.</param>
+    private async Task OnToggleExcluded(Transaction transaction)
+    {
+        transaction.IsExcluded = !transaction.IsExcluded;
+        await Storage.SetItemAsync<List<Transaction>?>(key, Transactions);
+    }
+
+    /// <summary>
+    /// Clears the stored transactions.
+    /// </summary>
+    private async Task OnClearStorage()
+    {
+        await Storage.SetItemAsync<List<Transaction>?>(key, new List<Transaction>());
+        Transactions = await Storage.GetItemAsync<List<Transaction>?>(key);
+        status = "Storage cleared.";
+    }
+
+    /// <summary>
+    /// Gets a Bootstrap class to use for the transaction row depending on the sum.
+    /// </summary>
+    /// <param name="sum">The transaction sum.</param>
+    /// <param name="isCredit">Indicates whether the transaction is credit, otherwise debit.</param>
+    private string GetTransactionClass(decimal sum, bool isCredit)
+    {
+        // TODO: Make this more dynamic or configurable
+
+        if (!isCredit && sum > 100)
+        {
+            return "table-danger";
+        }
+
+        if (!isCredit && sum > 50)
+        {
+            return "table-warning";
+        }
+
+        if (isCredit)
+        {
+            return "table-success";
+        }
+
+        return string.Empty;
+    }
+
+    /// <summary>
+    /// Refreshes the transaction categories.
+    /// </summary>
+    private async Task OnRefreshCategories()
+    {
+        categoriesRefreshing = true;
+        var matches = await Http.GetFromJsonAsync<List<Match>>("data/matches.json");
+        ParserLogic.UpdateTransactionCategories(Transactions, matches);
+        await Storage.SetItemAsync<List<Transaction>?>(key, Transactions);
+        status = $"Categories refreshed. App had {matches?.Count} category filters in the database.";
+        categoriesRefreshing = false;
+    }
+
+    private async Task OnArchiveTransactions()
+    {
+        ArchivedTransactions?.AddRange(Transactions ?? []);
+        await Storage.SetItemAsync<List<Transaction>?>(archiveKey, ArchivedTransactions);
+        Transactions?.Clear();
+        await Storage.SetItemAsync<List<Transaction>?>(key, Transactions);
+    }
+
+    private async Task OnUnArchiveTransactions()
+    {
+        Transactions?.AddRange(ArchivedTransactions ?? []);
+        await Storage.SetItemAsync<List<Transaction>?>(key, Transactions);
+        ArchivedTransactions?.Clear();
+        await Storage.SetItemAsync<List<Transaction>?>(archiveKey, ArchivedTransactions);
+    }
+}
