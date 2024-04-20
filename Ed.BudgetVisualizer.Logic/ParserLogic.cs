@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -90,6 +91,23 @@ namespace Ed.BudgetVisualizer.Logic
         }
 
         /// <summary>
+        /// Prepares a CSV string from transactions.
+        /// </summary>
+        /// <param name="transactions">Transactions to include.</param>
+        public string ToCsv(List<Transaction> transactions)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("\"Description\",\"Origin\",\"Sum\",\"CategoryId\"");
+
+            foreach (var t in transactions)
+            {
+                sb.AppendLine($"\"{Clean(t.Description)}\",\"{Clean(t.Origin)}\",{t.Sum},{t.CategoryId}");
+            }
+
+            return sb.ToString();
+        }
+
+        /// <summary>
         /// Determines each transaction's category from a list of available category matches.
         /// </summary>
         /// <param name="transactions">Transaction list.</param>
@@ -137,6 +155,11 @@ namespace Ed.BudgetVisualizer.Logic
             }
 
             return fields.ToArray();
+        }
+
+        private string Clean(string input)
+        {
+            return input.Replace("\"", "");
         }
     }
 }

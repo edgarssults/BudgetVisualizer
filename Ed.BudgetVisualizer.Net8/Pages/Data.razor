@@ -1,5 +1,7 @@
 ﻿@page "/data"
+@using System.Text
 @inject HttpClient Http
+@inject IJSRuntime JsRuntime
 @inject Ed.BudgetVisualizer.Logic.ParserLogic Parser
 @inject Blazored.LocalStorage.ILocalStorageService Storage
 
@@ -23,6 +25,7 @@
             Refresh Categories
         </button>
         <button type="button" class="btn btn-warning" @onclick="OnArchiveTransactions">Archive Transactions</button>
+        <button type="button" class="btn btn-success" @onclick="OnExportCsv">Download CSV for ML</button>
     }
     @if (ArchivedTransactions.IsAny())
     {
@@ -220,5 +223,13 @@
         await Storage.SetItemAsync<List<Transaction>?>(key, Transactions);
         ArchivedTransactions?.Clear();
         await Storage.SetItemAsync<List<Transaction>?>(archiveKey, ArchivedTransactions);
+    }
+
+    private async Task OnExportCsv(MouseEventArgs e)
+    {
+        var csv = Parser.ToCsv(Transactions);
+        var fileStream = new MemoryStream(new UTF8Encoding(true).GetBytes(csv));
+        using var streamRef = new DotNetStreamReference(stream: fileStream);
+        await JsRuntime.InvokeVoidAsync("DownloadFileFromStream", "data.csv", streamRef);
     }
 }
