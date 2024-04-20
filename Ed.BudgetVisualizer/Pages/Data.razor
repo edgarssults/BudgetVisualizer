@@ -1,8 +1,12 @@
 ﻿@page "/data"
 
+@* @using System.Text.Json
+@using Microsoft.JSInterop *@
+
 @inject Ed.BudgetVisualizer.Logic.ParserLogic Parser
 @inject LocalStorage Storage
 @inject HttpClient Http
+@* @inject IJSRuntime JSRuntime *@
 
 <h1>Data</h1>
 
@@ -23,6 +27,7 @@
             Refresh Categories
         </button>
         <button type="button" class="btn btn-warning" @onclick="OnArchiveTransactions">Archive Transactions</button>
+        <button type="button" class="btn btn-success" @onclick="OnExportCsv">Download CSV for ML</button>
     }
     @if (ArchivedTransactions.IsAny())
     {
@@ -225,5 +230,34 @@
         await Storage.SetItem<List<Transaction>>(key, Transactions);
         ArchivedTransactions.Clear();
         await Storage.SetItem<List<Transaction>>(archiveKey, ArchivedTransactions);
+    }
+
+    private async Task OnExportCsv(MouseEventArgs e)
+    {
+        throw new NotImplementedException();
+
+        // TODO: Need to migrate to .NET 8
+        // var obj = JsonSerializer.Serialize(objectToSave);
+        // var fileStream = new MemoryStream(new UTF8Encoding(true).GetBytes(obj));
+        // using var streamRef = new DotNetStreamReference(stream: fileStream);
+        // await JSRuntime.InvokeVoidAsync("downloadFileFromStream", fileName, streamRef);
+
+        // window.downloadFileFromStream = async (fileName, contentStreamReference) =>
+        // {
+        //     const arrayBuffer = await contentStreamReference.arrayBuffer();
+        //     const blob = new Blob([arrayBuffer]);
+        //     const url = URL.createObjectURL(blob);
+        //     const anchorElement = document.createElement('a');
+        //     anchorElement.href = url;
+
+        //     if (fileName)
+        //     {
+        //         anchorElement.download = fileName;
+        //     }
+
+        //     anchorElement.click();
+        //     anchorElement.remove();
+        //     URL.revokeObjectURL(url);
+        // }
     }
 }
