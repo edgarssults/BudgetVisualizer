@@ -1,12 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<None Remove="BudgetVisualizer.mlnet" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<EmbeddedResource Include="BudgetVisualizer.mlnet">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</EmbeddedResource>
+	</ItemGroup>
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>8.0</LangVersion>
-  </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.ML" Version="2.0.0" />
+		<PackageReference Include="Microsoft.ML.FastTree" Version="2.0.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Ed.BudgetVisualizer.Models\Ed.BudgetVisualizer.Models.csproj" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<ProjectReference Include="..\Ed.BudgetVisualizer.Models\Ed.BudgetVisualizer.Models.csproj" />
+	</ItemGroup>
 </Project>

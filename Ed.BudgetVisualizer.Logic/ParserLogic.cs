@@ -3,6 +3,7 @@ using Ed.BudgetVisualizer.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -96,15 +97,25 @@ namespace Ed.BudgetVisualizer.Logic
         /// <param name="transactions">Transactions to include.</param>
         public string ToCsv(List<Transaction> transactions)
         {
+            var nfi = new NumberFormatInfo
+            {
+                NumberDecimalSeparator = "."
+            };
+
             var sb = new StringBuilder();
             sb.AppendLine("\"Description\",\"Origin\",\"Sum\",\"CategoryId\"");
 
             foreach (var t in transactions)
             {
-                sb.AppendLine($"\"{Clean(t.Description)}\",\"{Clean(t.Origin)}\",{t.Sum},{t.CategoryId}");
+                sb.AppendLine($"\"{Clean(t.Description)}\",\"{Clean(t.Origin)}\",{t.Sum.ToString(nfi)},{t.CategoryId}");
             }
 
             return sb.ToString();
+        }
+
+        public static void LoadMlModel(Stream mlModel)
+        {
+            BudgetVisualizer.LoadModel(mlModel);
         }
 
         /// <summary>
@@ -132,6 +143,30 @@ namespace Ed.BudgetVisualizer.Logic
                 {
                     transaction.CategoryId = transaction.IsCredit ? 101 : 102; // TODO: Enum
                 }
+            }
+        }
+
+        /// <summary>
+        /// Determines each transaction's category from a list of available category matches.
+        /// </summary>
+        /// <param name="transactions">Transaction list.</param>
+        public static void UpdateTransactionCategories(List<Transaction> transactions)
+        {
+            var nfi = new NumberFormatInfo
+            {
+                NumberDecimalSeparator = "."
+            };
+
+            foreach (var transaction in transactions)
+            {
+                var prediction = BudgetVisualizer.Predict(new BudgetVisualizer.ModelInput
+                {
+                    Description = transaction.Description,
+                    Origin = transaction.Origin,
+                    Sum = transaction.Sum.ToString(nfi)
+                });
+
+                transaction.CategoryId = int.Parse(prediction.PredictedLabel);
             }
         }
 
