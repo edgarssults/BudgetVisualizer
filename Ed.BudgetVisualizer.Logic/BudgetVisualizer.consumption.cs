@@ -24,13 +24,17 @@ namespace Ed.BudgetVisualizer.Logic
             [ColumnName(@"Origin")]
             public string Origin { get; set; }
 
-            [LoadColumn(2)]
-            [ColumnName(@"Sum")]
-            public string Sum { get; set; }
-
             [LoadColumn(3)]
+            [ColumnName(@"IsDebit")]
+            public bool IsDebit { get; set; }
+
+            [LoadColumn(4)]
+            [ColumnName(@"IsCredit")]
+            public bool IsCredit { get; set; }
+
+            [LoadColumn(5)]
             [ColumnName(@"CategoryId")]
-            public string CategoryId { get; set; }
+            public float CategoryId { get; set; }
 
         }
 
@@ -48,8 +52,11 @@ namespace Ed.BudgetVisualizer.Logic
             [ColumnName(@"Origin")]
             public float[] Origin { get; set; }
 
-            [ColumnName(@"Sum")]
-            public float[] Sum { get; set; }
+            [ColumnName(@"IsDebit")]
+            public float[] IsDebit { get; set; }
+
+            [ColumnName(@"IsCredit")]
+            public float[] IsCredit { get; set; }
 
             [ColumnName(@"CategoryId")]
             public uint CategoryId { get; set; }
@@ -58,7 +65,7 @@ namespace Ed.BudgetVisualizer.Logic
             public float[] Features { get; set; }
 
             [ColumnName(@"PredictedLabel")]
-            public string PredictedLabel { get; set; }
+            public float PredictedLabel { get; set; }
 
             [ColumnName(@"Score")]
             public float[] Score { get; set; }
@@ -67,13 +74,15 @@ namespace Ed.BudgetVisualizer.Logic
 
         #endregion
 
-        public static PredictionEngine<ModelInput, ModelOutput> PredictEngine;
+        public static readonly Lazy<PredictionEngine<ModelInput, ModelOutput>> PredictEngine = new Lazy<PredictionEngine<ModelInput, ModelOutput>>(() => CreatePredictEngine(), true);
 
-        public static void LoadModel(Stream modelStream)
+        private static PredictionEngine<ModelInput, ModelOutput> CreatePredictEngine()
         {
+            var assembly = typeof(BudgetVisualizer).Assembly;
+            var modelStream = assembly.GetManifestResourceStream($"Ed.BudgetVisualizer.Logic.BudgetVisualizer.mlnet");
             var mlContext = new MLContext();
-            ITransformer mlModel = mlContext.Model.Load(modelStream, out var _);
-            PredictEngine = mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
+            var mlModel = mlContext.Model.Load(modelStream, out var _);
+            return mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
         }
 
         /// <summary>
@@ -83,7 +92,7 @@ namespace Ed.BudgetVisualizer.Logic
         /// <returns><seealso cref=" ModelOutput"/></returns>
         public static IOrderedEnumerable<KeyValuePair<string, float>> PredictAllLabels(ModelInput input)
         {
-            var predEngine = PredictEngine;
+            var predEngine = PredictEngine.Value;
             var result = predEngine.Predict(input);
             return GetSortedScoresWithLabels(result);
         }
@@ -118,7 +127,7 @@ namespace Ed.BudgetVisualizer.Logic
         /// <exception cref="Exception"></exception>
         private static IEnumerable<string> GetLabels(ModelOutput result)
         {
-            var schema = PredictEngine.OutputSchema;
+            var schema = PredictEngine.Value.OutputSchema;
 
             var labelColumn = schema.GetColumnOrNull("CategoryId");
             if (labelColumn == null)
@@ -127,7 +136,7 @@ namespace Ed.BudgetVisualizer.Logic
             }
 
             // Key values contains an ordered array of the possible labels. This allows us to map the results to the correct label value.
-            var keyNames = new VBuffer<ReadOnlyMemory<char>>();
+            var keyNames = new VBuffer<float>();
             labelColumn.Value.GetKeyValues(ref keyNames);
             return keyNames.DenseValues().Select(x => x.ToString());
         }
@@ -139,9 +148,8 @@ namespace Ed.BudgetVisualizer.Logic
         /// <returns><seealso cref=" ModelOutput"/></returns>
         public static ModelOutput Predict(ModelInput input)
         {
-            var predEngine = PredictEngine;
+            var predEngine = PredictEngine.Value;
             return predEngine.Predict(input);
         }
-
     }
 }

@@ -1,6 +1,7 @@
 ﻿@page "/diagrams"
 @inject HttpClient Http
 @inject IJSRuntime JsRuntime
+@inject Ed.BudgetVisualizer.Logic.ParserLogic Parser
 @inject Blazored.LocalStorage.ILocalStorageService Storage
 
 <PageTitle>Diagrams</PageTitle>
@@ -29,8 +30,7 @@
     /// </summary>
     protected override async Task OnInitializedAsync()
     {
-        Categories = (await Http.GetFromJsonAsync<List<Category>>("data/categories.json"))
-            ?.ToDictionary(key => key.CategoryId, val => val);
+        Categories = Parser.GetCategories().ToDictionary(key => key.CategoryId, val => val);
 
         // Load stored transactions
         Transactions = await Storage.GetItemAsync<List<Transaction>>(key);

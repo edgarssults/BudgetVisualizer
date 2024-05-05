@@ -1,8 +1,13 @@
 ﻿{
   "Scenario": "Classification",
   "DataSource": {
+    "Version": 3,
+    "EscapeCharacter": "\"",
+    "ReadMultiLines": false,
+    "KeepDiacritics": false,
+    "KeepPunctuations": false,
+    "AllowQuoting": true,
     "Type": "TabularFile",
-    "Version": 1,
     "FilePath": "C:\\Users\\edgar\\Downloads\\data.csv",
     "Delimiter": ",",
     "DecimalMarker": ".",
@@ -14,7 +19,7 @@
         "ColumnDataFormat": "String",
         "IsCategorical": false,
         "Type": "Column",
-        "Version": 4
+        "Version": 5
       },
       {
         "ColumnName": "Origin",
@@ -22,23 +27,39 @@
         "ColumnDataFormat": "String",
         "IsCategorical": false,
         "Type": "Column",
-        "Version": 4
+        "Version": 5
       },
       {
         "ColumnName": "Sum",
-        "ColumnPurpose": "Feature",
-        "ColumnDataFormat": "String",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "Single",
         "IsCategorical": false,
         "Type": "Column",
-        "Version": 4
+        "Version": 5
+      },
+      {
+        "ColumnName": "IsDebit",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Boolean",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "IsCredit",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Boolean",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 5
       },
       {
         "ColumnName": "CategoryId",
         "ColumnPurpose": "Label",
-        "ColumnDataFormat": "String",
-        "IsCategorical": false,
+        "ColumnDataFormat": "Single",
+        "IsCategorical": true,
         "Type": "Column",
-        "Version": 4
+        "Version": 5
       }
     ]
   },
@@ -53,218 +74,39 @@
       {
         "Version": 1,
         "Type": "Trial",
-        "TrainerName": "FastForestOva",
-        "Score": 0.65212283203879839,
-        "RuntimeInSeconds": 4.107,
-        "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e2 * e3 * e4 * e6 * e12",
-          "e0": {
-            "InputColumnName": "Description",
-            "OutputColumnName": "Description"
-          },
-          "e1": {
-            "InputColumnName": "Origin",
-            "OutputColumnName": "Origin"
-          },
-          "e12": {
-            "OutputColumnName": "PredictedLabel",
-            "InputColumnName": "PredictedLabel"
-          },
-          "e2": {
-            "InputColumnName": "Sum",
-            "OutputColumnName": "Sum"
-          },
-          "e3": {
-            "InputColumnNames": [
-              "Description",
-              "Origin",
-              "Sum"
-            ],
-            "OutputColumnName": "Features"
-          },
-          "e4": {
-            "OutputColumnName": "CategoryId",
-            "InputColumnName": "CategoryId",
-            "AddKeyValueAnnotationsAsText": false
-          },
-          "e6": {
-            "NumberOfTrees": 4,
-            "NumberOfLeaves": 4,
-            "FeatureFraction": 1.0,
-            "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
-          },
-          "e10": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 0.1,
-            "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
-          },
-          "e11": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 0.1,
-            "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
-          },
-          "e5": {
-            "NumberOfLeaves": 4,
-            "MinimumExampleCountPerLeaf": 20,
-            "NumberOfTrees": 4,
-            "MaximumBinCountPerFeature": 255,
-            "FeatureFraction": 1.0,
-            "LearningRate": 0.099999999999999978,
-            "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
-          },
-          "e7": {
-            "NumberOfLeaves": 4,
-            "MinimumExampleCountPerLeaf": 20,
-            "LearningRate": 1.0,
-            "NumberOfTrees": 4,
-            "SubsampleFraction": 1.0,
-            "MaximumBinCountPerFeature": 255,
-            "FeatureFraction": 1.0,
-            "L1Regularization": 2E-10,
-            "L2Regularization": 1.0,
-            "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
-          },
-          "e8": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 1.0,
-            "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
-          },
-          "e9": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 1.0,
-            "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
-          }
-        }
-      },
-      {
-        "Version": 1,
-        "Type": "Trial",
-        "TrainerName": "LbfgsMaximumEntropyMulti",
-        "Score": 0.45767664330689539,
-        "RuntimeInSeconds": 0.949,
-        "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e2 * e3 * e4 * e9 * e12",
-          "e0": {
-            "InputColumnName": "Description",
-            "OutputColumnName": "Description"
-          },
-          "e1": {
-            "InputColumnName": "Origin",
-            "OutputColumnName": "Origin"
-          },
-          "e12": {
-            "OutputColumnName": "PredictedLabel",
-            "InputColumnName": "PredictedLabel"
-          },
-          "e2": {
-            "InputColumnName": "Sum",
-            "OutputColumnName": "Sum"
-          },
-          "e3": {
-            "InputColumnNames": [
-              "Description",
-              "Origin",
-              "Sum"
-            ],
-            "OutputColumnName": "Features"
-          },
-          "e4": {
-            "OutputColumnName": "CategoryId",
-            "InputColumnName": "CategoryId",
-            "AddKeyValueAnnotationsAsText": false
-          },
-          "e9": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 1.0,
-            "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
-          },
-          "e10": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 0.1,
-            "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
-          },
-          "e11": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 0.1,
-            "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
-          },
-          "e5": {
-            "NumberOfLeaves": 4,
-            "MinimumExampleCountPerLeaf": 20,
-            "NumberOfTrees": 4,
-            "MaximumBinCountPerFeature": 255,
-            "FeatureFraction": 1.0,
-            "LearningRate": 0.099999999999999978,
-            "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
-          },
-          "e6": {
-            "NumberOfTrees": 4,
-            "NumberOfLeaves": 4,
-            "FeatureFraction": 1.0,
-            "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
-          },
-          "e7": {
-            "NumberOfLeaves": 4,
-            "MinimumExampleCountPerLeaf": 20,
-            "LearningRate": 1.0,
-            "NumberOfTrees": 4,
-            "SubsampleFraction": 1.0,
-            "MaximumBinCountPerFeature": 255,
-            "FeatureFraction": 1.0,
-            "L1Regularization": 2E-10,
-            "L2Regularization": 1.0,
-            "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
-          },
-          "e8": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 1.0,
-            "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
-          }
-        }
-      },
-      {
-        "Version": 1,
-        "Type": "Trial",
         "TrainerName": "FastTreeOva",
-        "Score": 0.38147267453990147,
-        "RuntimeInSeconds": 3.706,
+        "Score": 0.66591770133970074,
+        "RuntimeInSeconds": 7.861,
         "Parameter": {
           "_SCHEMA_": "e0 * e1 * e2 * e3 * e4 * e5 * e12",
           "e0": {
-            "InputColumnName": "Description",
-            "OutputColumnName": "Description"
+            "OutputColumnNames": [
+              "IsDebit",
+              "IsCredit"
+            ],
+            "InputColumnNames": [
+              "IsDebit",
+              "IsCredit"
+            ]
           },
           "e1": {
-            "InputColumnName": "Origin",
-            "OutputColumnName": "Origin"
+            "InputColumnName": "Description",
+            "OutputColumnName": "Description"
           },
           "e12": {
             "OutputColumnName": "PredictedLabel",
             "InputColumnName": "PredictedLabel"
           },
           "e2": {
-            "InputColumnName": "Sum",
-            "OutputColumnName": "Sum"
+            "InputColumnName": "Origin",
+            "OutputColumnName": "Origin"
           },
           "e3": {
             "InputColumnNames": [
+              "IsDebit",
+              "IsCredit",
               "Description",
-              "Origin",
-              "Sum"
+              "Origin"
             ],
             "OutputColumnName": "Features"
           },
@@ -281,7 +123,32 @@
             "FeatureFraction": 1.0,
             "LearningRate": 0.099999999999999978,
             "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "SdcaMaximumEntropyMulti",
+        "Score": 0.14954821266139717,
+        "RuntimeInSeconds": 0.87,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e4 * e10 * e12",
+          "e0": {
+            "OutputColumnNames": [
+              "IsDebit",
+              "IsCredit"
+            ],
+            "InputColumnNames": [
+              "IsDebit",
+              "IsCredit"
+            ]
+          },
+          "e1": {
+            "InputColumnName": "Description",
+            "OutputColumnName": "Description"
           },
           "e10": {
             "L1Regularization": 1.0,
@@ -289,49 +156,33 @@
             "LabelColumnName": "CategoryId",
             "FeatureColumnName": "Features"
           },
-          "e11": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 0.1,
-            "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
+          "e12": {
+            "OutputColumnName": "PredictedLabel",
+            "InputColumnName": "PredictedLabel"
           },
-          "e6": {
-            "NumberOfTrees": 4,
-            "NumberOfLeaves": 4,
-            "FeatureFraction": 1.0,
-            "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
+          "e2": {
+            "InputColumnName": "Origin",
+            "OutputColumnName": "Origin"
           },
-          "e7": {
-            "NumberOfLeaves": 4,
-            "MinimumExampleCountPerLeaf": 20,
-            "LearningRate": 1.0,
-            "NumberOfTrees": 4,
-            "SubsampleFraction": 1.0,
-            "MaximumBinCountPerFeature": 255,
-            "FeatureFraction": 1.0,
-            "L1Regularization": 2E-10,
-            "L2Regularization": 1.0,
-            "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
+          "e3": {
+            "InputColumnNames": [
+              "IsDebit",
+              "IsCredit",
+              "Description",
+              "Origin"
+            ],
+            "OutputColumnName": "Features"
           },
-          "e8": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 1.0,
-            "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
-          },
-          "e9": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 1.0,
-            "LabelColumnName": "CategoryId",
-            "FeatureColumnName": "Features"
+          "e4": {
+            "OutputColumnName": "CategoryId",
+            "InputColumnName": "CategoryId",
+            "AddKeyValueAnnotationsAsText": false
           }
         }
       }
     ],
     "Estimators": {
-      "e0": "FeaturizeText",
+      "e0": "OneHotEncoding",
       "e1": "FeaturizeText",
       "e2": "FeaturizeText",
       "e3": "Concatenate",
@@ -350,9 +201,10 @@
     "ModelFilePath": "D:\\Code\\BudgetVisualizer\\Ed.BudgetVisualizer.Logic\\BudgetVisualizer.mlnet"
   },
   "Type": "TrainingConfig",
-  "Version": 4,
+  "Version": 5,
   "TrainingOption": {
-    "Version": 1,
+    "Version": 2,
+    "Subsampling": false,
     "Type": "ClassificationTrainingOption",
     "TrainingTime": 10,
     "LabelColumn": "CategoryId",

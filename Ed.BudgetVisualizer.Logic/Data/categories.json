@@ -130,5 +130,9 @@
   {
     "CategoryId": 1032,
     "Name": "Beauty"
+  },
+  {
+    "CategoryId": 1033,
+    "Name": "Construction"
   }
 ]

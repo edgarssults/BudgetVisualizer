@@ -241,7 +241,7 @@
   },
   {
     "CategoryId": 1016,
-    "OriginRegex": ".ENCONTROL BALTIC. SIA"
+    "OriginRegex": "ENCONTROL BALTIC"
   },
   {
     "CategoryId": 1003,
@@ -1814,5 +1814,265 @@
   {
     "CategoryId": 1025,
     "OriginRegex": "OGRES NOVADA PAŠVALDĪBA"
+  },
+  {
+    "CategoryId": 1014,
+    "OriginRegex": "Restbars NOK NOK"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "GUDZOVSKIS TOMS"
+  },
+  {
+    "CategoryId": 1005,
+    "OriginRegex": "YouTube Member"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "BOGDANOVS ARTŪRS"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "KRISTAPS EGLĪTE"
+  },
+  {
+    "CategoryId": 1025,
+    "OriginRegex": "VALSTS IENEMUMU DIENESTS"
+  },
+  {
+    "CategoryId": 1014,
+    "OriginRegex": "Zeikars-Juglas"
+  },
+  {
+    "CategoryId": 1010,
+    "OriginRegex": "Stenders-veikals"
+  },
+  {
+    "CategoryId": 1021,
+    "OriginRegex": "GEORG OTS SPAA HOTELL"
+  },
+  {
+    "CategoryId": 1013,
+    "OriginRegex": "Bar ANTIJOB"
+  },
+  {
+    "CategoryId": 1014,
+    "DescriptionRegex": "Erglu stacija"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "Edvards Gobins"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "EDGARS PAIDERIS"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "KASPARS GOROBECS"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "KRIŠJĀNIS OSKERKO"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "MĀRCIS MINIŅŠ"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "REINIS KOKINS"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "GVIDO MEINERTS"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "VASIĻJEVS RENĀTS"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "Dzintars Paideris"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "PĒTERIS DOZE"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "Dzintars Paideris"
+  },
+  {
+    "CategoryId": 1025,
+    "OriginRegex": "VALSTS BUDZETS"
+  },
+  {
+    "CategoryId": 1010,
+    "OriginRegex": "COVERME veikals"
+  },
+  {
+    "CategoryId": 1013,
+    "OriginRegex": "PIPARS SAGA"
+  },
+  {
+    "CategoryId": 1010,
+    "OriginRegex": "M79 SIA"
+  },
+  {
+    "CategoryId": 1010,
+    "OriginRegex": "ABU SIA"
+  },
+  {
+    "CategoryId": 1010,
+    "OriginRegex": "Intelligent Servers Limit"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "KRISTAPS ŠMAUKSTELIS"
+  },
+  {
+    "CategoryId": 1009,
+    "OriginRegex": "ASTARTE NAFTA"
+  },
+  {
+    "CategoryId": 1026,
+    "OriginRegex": "INZENIERU ARSENALS"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "Vadims Kasperuks"
+  },
+  {
+    "CategoryId": 1003,
+    "OriginRegex": "Sena Bode"
+  },
+  {
+    "CategoryId": 1013,
+    "OriginRegex": "KAFEJNICA L-TACO"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "MADARA ŠICĀNE"
+  },
+  {
+    "CategoryId": 1033,
+    "OriginRegex": "AS SADALES TĪKLS"
+  },
+  {
+    "CategoryId": 1001,
+    "OriginRegex": "CLEAN CONTROL"
+  },
+  {
+    "CategoryId": 1010,
+    "OriginRegex": "ZARA HOME"
+  },
+  {
+    "CategoryId": 1013,
+    "OriginRegex": "HuMMus"
+  },
+  {
+    "CategoryId": 1014,
+    "OriginRegex": "FOOD SOCIETY"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "Rolands Gipters"
+  },
+  {
+    "CategoryId": 1014,
+    "OriginRegex": "PILSKROGS"
+  },
+  {
+    "CategoryId": 1014,
+    "OriginRegex": "Skapis-Desinas"
+  },
+  {
+    "CategoryId": 1014,
+    "OriginRegex": "SumUp"
+  },
+  {
+    "CategoryId": 1014,
+    "OriginRegex": "Rutare"
+  },
+  {
+    "CategoryId": 1014,
+    "OriginRegex": "EKSELENCE SIA"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "ANCE BĒRZIŅA"
+  },
+  {
+    "CategoryId": 1014,
+    "OriginRegex": "AS CESU ALUS"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "ANNIJA GULBE"
+  },
+  {
+    "CategoryId": 1010,
+    "OriginRegex": "DABASMAIZE"
+  },
+  {
+    "CategoryId": 1018,
+    "OriginRegex": "NILS FRIDRIHSONS"
+  },
+  {
+    "CategoryId": 1033,
+    "OriginRegex": "TOREX GROUP"
+  },
+  {
+    "CategoryId": 1033,
+    "OriginRegex": "ICETEC LTD"
+  },
+  {
+    "CategoryId": 1033,
+    "OriginRegex": "KRUZA-VEIKALS"
+  },
+  {
+    "CategoryId": 1014,
+    "OriginRegex": "Indian Raja"
+  },
+  {
+    "CategoryId": 1014,
+    "OriginRegex": "Hacapurija"
+  },
+  {
+    "CategoryId": 1014,
+    "OriginRegex": "MEAET DADDY"
+  },
+  {
+    "CategoryId": 1014,
+    "OriginRegex": "Antonijas 13-Unreal fe"
+  },
+  {
+    "CategoryId": 1003,
+    "OriginRegex": "CANDY POP"
+  },
+  {
+    "CategoryId": 1019,
+    "OriginRegex": "Apotheka"
+  },
+  {
+    "CategoryId": 1014,
+    "OriginRegex": "Bella bella"
+  },
+  {
+    "CategoryId": 1009,
+    "OriginRegex": "DUS BAUSKA"
+  },
+  {
+    "CategoryId": 1010,
+    "OriginRegex": "GINGER"
+  },
+  {
+    "CategoryId": 1026,
+    "DescriptionRegex": "/POL"
+  },
+  {
+    "CategoryId": 1026,
+    "DescriptionRegex": "/LTU"
   }
 ]

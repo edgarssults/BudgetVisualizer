@@ -1,5 +1,6 @@
 ﻿using Ed.BudgetVisualizer.Logic.Parsers;
 using Ed.BudgetVisualizer.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -103,28 +104,24 @@ namespace Ed.BudgetVisualizer.Logic
             };
 
             var sb = new StringBuilder();
-            sb.AppendLine("\"Description\",\"Origin\",\"Sum\",\"CategoryId\"");
+            sb.AppendLine("\"Description\",\"Origin\",\"Sum\",\"IsDebit\",\"IsCredit\",\"CategoryId\"");
 
             foreach (var t in transactions)
             {
-                sb.AppendLine($"\"{Clean(t.Description)}\",\"{Clean(t.Origin)}\",{t.Sum.ToString(nfi)},{t.CategoryId}");
+                sb.AppendLine($"\"{Clean(t.Description)}\",\"{Clean(t.Origin)}\",{t.Sum.ToString(nfi)},\"{t.IsDebit}\",\"{t.IsCredit}\",{t.CategoryId}");
             }
 
             return sb.ToString();
-        }
-
-        public static void LoadMlModel(Stream mlModel)
-        {
-            BudgetVisualizer.LoadModel(mlModel);
         }
 
         /// <summary>
         /// Determines each transaction's category from a list of available category matches.
         /// </summary>
         /// <param name="transactions">Transaction list.</param>
-        /// <param name="matches">Match list.</param>
-        public static void UpdateTransactionCategories(List<Transaction> transactions, List<Models.Match> matches)
+        public void MatchCategories(List<Transaction> transactions)
         {
+            var matches = GetMatches();
+
             foreach (var transaction in transactions)
             {
                 bool isSet = false;
@@ -150,24 +147,41 @@ namespace Ed.BudgetVisualizer.Logic
         /// Determines each transaction's category from a list of available category matches.
         /// </summary>
         /// <param name="transactions">Transaction list.</param>
-        public static void UpdateTransactionCategories(List<Transaction> transactions)
+        public void PredictCategories(List<Transaction> transactions)
         {
-            var nfi = new NumberFormatInfo
-            {
-                NumberDecimalSeparator = "."
-            };
-
             foreach (var transaction in transactions)
             {
                 var prediction = BudgetVisualizer.Predict(new BudgetVisualizer.ModelInput
                 {
                     Description = transaction.Description,
                     Origin = transaction.Origin,
-                    Sum = transaction.Sum.ToString(nfi)
+                    IsCredit = transaction.IsCredit,
+                    IsDebit = transaction.IsDebit
                 });
 
-                transaction.CategoryId = int.Parse(prediction.PredictedLabel);
+                // TODO: Check score of prediction
+                transaction.CategoryId = (int)prediction.PredictedLabel;
             }
+        }
+
+        public List<Models.Match> GetMatches()
+        {
+            var assembly = typeof(ParserLogic).Assembly;
+            var modelStream = assembly.GetManifestResourceStream($"Ed.BudgetVisualizer.Logic.Data.matches.json");
+            using var streamReader = new StreamReader(modelStream);
+            using var jsonTextReader = new JsonTextReader(streamReader);
+            var jsonSerializer = new JsonSerializer();
+            return jsonSerializer.Deserialize<List<Models.Match>>(jsonTextReader);
+        }
+
+        public List<Category> GetCategories()
+        {
+            var assembly = typeof(ParserLogic).Assembly;
+            var modelStream = assembly.GetManifestResourceStream($"Ed.BudgetVisualizer.Logic.Data.categories.json");
+            using var streamReader = new StreamReader(modelStream);
+            using var jsonTextReader = new JsonTextReader(streamReader);
+            var jsonSerializer = new JsonSerializer();
+            return jsonSerializer.Deserialize<List<Models.Category>>(jsonTextReader);
         }
 
         /// <summary>

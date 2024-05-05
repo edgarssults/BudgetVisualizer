@@ -97,8 +97,7 @@
     /// </summary>
     protected override async Task OnInitializedAsync()
     {
-        Categories = (await Http.GetFromJsonAsync<List<Category>>("data/categories.json"))
-            ?.ToDictionary(key => key.CategoryId, val => val);
+        Categories = Parser.GetCategories().ToDictionary(key => key.CategoryId, val => val);
 
         Transactions = await Storage.GetItemAsync<List<Transaction>>(key);
         if (Transactions == null)
@@ -122,22 +121,16 @@
     private async Task OnFileSelection(InputFileChangeEventArgs e)
     {
         int parsedTransactionCount = 0;
-        var matches = await Http.GetFromJsonAsync<List<Match>>("data/matches.json");
 
         // TODO: Choose whether to use ML or regexes
-        // https://github.com/bartczernicki/Test-Blazor-MLNet-WASMHost
-        var assembly = typeof(Ed.BudgetVisualizer.Logic.BudgetVisualizer).Assembly;
-        var resource = assembly.GetManifestResourceStream($"Ed.BudgetVisualizer.Logic.BudgetVisualizer.mlnet");
-        ParserLogic.LoadMlModel(resource);
-
         // Parse transactions and add them to the transaction list
         foreach (var file in e.GetMultipleFiles())
         {
             var parsedTransactions = await Parser.ParseFile(file.OpenReadStream());
             if (parsedTransactions.Any())
             {
-                //ParserLogic.UpdateTransactionCategories(parsedTransactions, matches);
-                ParserLogic.UpdateTransactionCategories(parsedTransactions);
+                //Parser.MatchCategories(parsedTransactions);
+                Parser.PredictCategories(parsedTransactions);
                 Transactions?.AddRange(parsedTransactions);
                 parsedTransactionCount += parsedTransactions.Count;
             }
@@ -205,10 +198,10 @@
     private async Task OnRefreshCategories()
     {
         categoriesRefreshing = true;
-        var matches = await Http.GetFromJsonAsync<List<Match>>("data/matches.json");
-        //ParserLogic.UpdateTransactionCategories(Transactions, matches);
+        //Parser.MatchCategories(Transactions);
+        Parser.PredictCategories(Transactions);
         await Storage.SetItemAsync<List<Transaction>?>(key, Transactions);
-        status = $"Categories refreshed. App had {matches?.Count} category filters in the database.";
+        status = $"Categories refreshed.";
         categoriesRefreshing = false;
     }
 

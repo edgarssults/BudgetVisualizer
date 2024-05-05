@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.ML.Data;
 using Microsoft.ML.Trainers.FastTree;
 using Microsoft.ML.Trainers;
+using Microsoft.ML.Transforms;
 using Microsoft.ML;
 
 namespace Ed.BudgetVisualizer.Logic
@@ -17,6 +18,7 @@ namespace Ed.BudgetVisualizer.Logic
         public const string RetrainFilePath =  @"C:\Users\edgar\Downloads\data.csv";
         public const char RetrainSeparatorChar = ',';
         public const bool RetrainHasHeader =  true;
+        public const bool RetrainAllowQuoting =  true;
 
          /// <summary>
         /// Train a new model with the provided dataset.
@@ -25,11 +27,11 @@ namespace Ed.BudgetVisualizer.Logic
         /// <param name="inputDataFilePath">Path to the data file for training.</param>
         /// <param name="separatorChar">Separator character for delimited training file.</param>
         /// <param name="hasHeader">Boolean if training file has a header.</param>
-        public static void Train(string outputModelPath, string inputDataFilePath = RetrainFilePath, char separatorChar = RetrainSeparatorChar, bool hasHeader = RetrainHasHeader)
+        public static void Train(string outputModelPath, string inputDataFilePath = RetrainFilePath, char separatorChar = RetrainSeparatorChar, bool hasHeader = RetrainHasHeader, bool allowQuoting = RetrainAllowQuoting)
         {
             var mlContext = new MLContext();
 
-            var data = LoadIDataViewFromFile(mlContext, inputDataFilePath, separatorChar, hasHeader);
+            var data = LoadIDataViewFromFile(mlContext, inputDataFilePath, separatorChar, hasHeader, allowQuoting);
             var model = RetrainModel(mlContext, data);
             SaveModel(mlContext, model, data, outputModelPath);
         }
@@ -42,11 +44,10 @@ namespace Ed.BudgetVisualizer.Logic
         /// <param name="separatorChar">Separator character for delimited training file.</param>
         /// <param name="hasHeader">Boolean if training file has a header.</param>
         /// <returns>IDataView with loaded training data.</returns>
-        public static IDataView LoadIDataViewFromFile(MLContext mlContext, string inputDataFilePath, char separatorChar, bool hasHeader)
+        public static IDataView LoadIDataViewFromFile(MLContext mlContext, string inputDataFilePath, char separatorChar, bool hasHeader, bool allowQuoting)
         {
-            return mlContext.Data.LoadFromTextFile<ModelInput>(inputDataFilePath, separatorChar, hasHeader);
+            return mlContext.Data.LoadFromTextFile<ModelInput>(inputDataFilePath, separatorChar, hasHeader, allowQuoting: allowQuoting);
         }
-
 
 
         /// <summary>
@@ -69,7 +70,7 @@ namespace Ed.BudgetVisualizer.Logic
 
 
         /// <summary>
-        /// Retrains model using the pipeline generated as part of the training process.
+        /// Retrain model using the pipeline generated as part of the training process.
         /// </summary>
         /// <param name="mlContext"></param>
         /// <param name="trainData"></param>
@@ -82,7 +83,6 @@ namespace Ed.BudgetVisualizer.Logic
             return model;
         }
 
-
         /// <summary>
         /// build the pipeline that is used from model builder. Use this function to retrain model.
         /// </summary>
@@ -91,12 +91,12 @@ namespace Ed.BudgetVisualizer.Logic
         public static IEstimator<ITransformer> BuildPipeline(MLContext mlContext)
         {
             // Data process configuration with pipeline data transformations
-            var pipeline = mlContext.Transforms.Text.FeaturizeText(inputColumnName:@"Description",outputColumnName:@"Description")      
+            var pipeline = mlContext.Transforms.Categorical.OneHotEncoding(new []{new InputOutputColumnPair(@"IsDebit", @"IsDebit"),new InputOutputColumnPair(@"IsCredit", @"IsCredit")}, outputKind: OneHotEncodingEstimator.OutputKind.Indicator)      
+                                    .Append(mlContext.Transforms.Text.FeaturizeText(inputColumnName:@"Description",outputColumnName:@"Description"))      
                                     .Append(mlContext.Transforms.Text.FeaturizeText(inputColumnName:@"Origin",outputColumnName:@"Origin"))      
-                                    .Append(mlContext.Transforms.Text.FeaturizeText(inputColumnName:@"Sum",outputColumnName:@"Sum"))      
-                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"Description",@"Origin",@"Sum"}))      
+                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"IsDebit",@"IsCredit",@"Description",@"Origin"}))      
                                     .Append(mlContext.Transforms.Conversion.MapValueToKey(outputColumnName:@"CategoryId",inputColumnName:@"CategoryId",addKeyValueAnnotationsAsText:false))      
-                                    .Append(mlContext.MulticlassClassification.Trainers.OneVersusAll(binaryEstimator:mlContext.BinaryClassification.Trainers.FastForest(new FastForestBinaryTrainer.Options(){NumberOfTrees=4,NumberOfLeaves=4,FeatureFraction=1F,LabelColumnName=@"CategoryId",FeatureColumnName=@"Features"}),labelColumnName:@"CategoryId"))      
+                                    .Append(mlContext.MulticlassClassification.Trainers.OneVersusAll(binaryEstimator:mlContext.BinaryClassification.Trainers.FastTree(new FastTreeBinaryTrainer.Options(){NumberOfLeaves=4,MinimumExampleCountPerLeaf=20,NumberOfTrees=4,MaximumBinCountPerFeature=254,FeatureFraction=1,LearningRate=0.1,LabelColumnName=@"CategoryId",FeatureColumnName=@"Features",DiskTranspose=false}),labelColumnName: @"CategoryId"))      
                                     .Append(mlContext.Transforms.Conversion.MapKeyToValue(outputColumnName:@"PredictedLabel",inputColumnName:@"PredictedLabel"));
 
             return pipeline;
