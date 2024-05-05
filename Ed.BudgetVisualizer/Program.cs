@@ -1,16 +1,19 @@
-﻿using Microsoft.AspNetCore.Blazor.Hosting;
+using Blazored.LocalStorage;
+using Ed.BudgetVisualizer.Logic;
+using Ed.BudgetVisualizer;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using System.Globalization;
 
-namespace Ed.BudgetVisualizer
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+var builder = WebAssemblyHostBuilder.CreateDefault(args);
+builder.RootComponents.Add<App>("#app");
+builder.RootComponents.Add<HeadOutlet>("head::after");
 
-        public static IWebAssemblyHostBuilder CreateHostBuilder(string[] args) =>
-            BlazorWebAssemblyHost.CreateDefaultBuilder()
-                .UseBlazorStartup<Startup>();
-    }
-}
+builder.Services.AddSingleton<ParserLogic, ParserLogic>();
+builder.Services.AddBlazoredLocalStorage();
+
+// TODO: Support other cultures?
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("lv-LV");
+CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("lv-LV");
+
+await builder.Build().RunAsync();

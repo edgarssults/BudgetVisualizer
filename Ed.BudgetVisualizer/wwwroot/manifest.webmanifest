@@ -1,6 +1,6 @@
 {
-  "name": "Ed.BudgetVisualizer.Net8",
-  "short_name": "Ed.BudgetVisualizer.Net8",
+  "name": "Ed.BudgetVisualizer",
+  "short_name": "Ed.BudgetVisualizer",
   "id": "./",
   "start_url": "./",
   "display": "standalone",

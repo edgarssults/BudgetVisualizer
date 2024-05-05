@@ -1,21 +1,18 @@
 ﻿@page "/data"
-
-@* @using System.Text.Json
-@using Microsoft.JSInterop *@
-
+@using System.Text
+@inject IJSRuntime JsRuntime
 @inject Ed.BudgetVisualizer.Logic.ParserLogic Parser
-@inject LocalStorage Storage
-@inject HttpClient Http
-@* @inject IJSRuntime JSRuntime *@
+@inject Blazored.LocalStorage.ILocalStorageService Storage
+
+<PageTitle>Data</PageTitle>
 
 <h1>Data</h1>
 
-<div class="input-group mb-3">
-    <div class="custom-file">
-        <InputFile OnChange="OnFileSelection" UnmatchedParameters="inputFileParameters" />
-        <label class="custom-file-label">Choose a CSV file to import transactions from</label>
-    </div>
+<div class="mb-3">
+    <label for="formFile" class="form-label">Choose a CSV file to import transactions from</label>
+    <InputFile OnChange="OnFileSelection" multiple class="form-control" />
 </div>
+
 <div class="btn-group mb-3" role="group">
     @if (Transactions.IsAny())
     {
@@ -65,7 +62,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var t in Transactions)
+            @foreach (var t in Transactions ?? [])
             {
                 <tr class="@GetTransactionClass(t.Sum, t.IsCredit)">
                     <th scope="row">@t.Date.ToShortDateString()</th>
@@ -86,63 +83,54 @@
 }
 
 @code {
-    private string status;
+    private string? status;
     private string key = "transactions";
     private string archiveKey = "archive";
     private bool categoriesRefreshing = false;
-    private List<Transaction> Transactions;
-    private List<Transaction> ArchivedTransactions;
-    private Dictionary<int, Category> Categories;
-
-    /// <summary>
-    /// Additional parameters for the file upload control.
-    /// </summary>
-    private Dictionary<string, object> inputFileParameters = new Dictionary<string, object>
-{
-        { "class", "custom-file-input" },
-        { "multiple", "true" }
-    };
+    private List<Transaction>? Transactions;
+    private List<Transaction>? ArchivedTransactions = [];
+    private Dictionary<int, Category>? Categories = [];
 
     /// <summary>
     /// Handles the component initialization event.
     /// </summary>
     protected override async Task OnInitializedAsync()
     {
-        Categories = (await Http.GetJsonAsync<List<Category>>("data/categories.json"))
-            .ToDictionary(key => key.CategoryId, val => val);
+        Categories = Parser.GetCategories().ToDictionary(key => key.CategoryId, val => val);
 
-        Transactions = await Storage.GetItem<List<Transaction>>(key);
+        Transactions = await Storage.GetItemAsync<List<Transaction>>(key);
         if (Transactions == null)
         {
-            await Storage.SetItem<List<Transaction>>(key, new List<Transaction>());
-            Transactions = await Storage.GetItem<List<Transaction>>(key);
+            await Storage.SetItemAsync<List<Transaction>>(key, new List<Transaction>());
+            Transactions = await Storage.GetItemAsync<List<Transaction>>(key);
         }
 
-        ArchivedTransactions = await Storage.GetItem<List<Transaction>>(archiveKey);
+        ArchivedTransactions = await Storage.GetItemAsync<List<Transaction>>(archiveKey);
         if (ArchivedTransactions == null)
         {
-            await Storage.SetItem<List<Transaction>>(archiveKey, new List<Transaction>());
-            ArchivedTransactions = await Storage.GetItem<List<Transaction>>(archiveKey);
+            await Storage.SetItemAsync<List<Transaction>>(archiveKey, new List<Transaction>());
+            ArchivedTransactions = await Storage.GetItemAsync<List<Transaction>>(archiveKey);
         }
     }
 
     /// <summary>
     /// Handles the file selection event.
     /// </summary>
-    /// <param name="files">List of selected files.</param>
-    private async Task OnFileSelection(IFileListEntry[] files)
+    /// <param name="e">File input arguments.</param>
+    private async Task OnFileSelection(InputFileChangeEventArgs e)
     {
         int parsedTransactionCount = 0;
-        List<Match> matches = await Http.GetJsonAsync<List<Match>>("data/matches.json");
 
+        // TODO: Choose whether to use ML or regexes
         // Parse transactions and add them to the transaction list
-        foreach (var file in files)
+        foreach (var file in e.GetMultipleFiles())
         {
-            List<Transaction> parsedTransactions = await Parser.ParseFile(file.Data);
+            var parsedTransactions = await Parser.ParseFile(file.OpenReadStream());
             if (parsedTransactions.Any())
             {
-                ParserLogic.UpdateTransactionCategories(parsedTransactions, matches);
-                Transactions.AddRange(parsedTransactions);
+                //Parser.MatchCategories(parsedTransactions);
+                Parser.PredictCategories(parsedTransactions);
+                Transactions?.AddRange(parsedTransactions);
                 parsedTransactionCount += parsedTransactions.Count;
             }
         }
@@ -150,10 +138,10 @@
         // Update the transaction storage
         if (parsedTransactionCount > 0)
         {
-            await Storage.SetItem<List<Transaction>>(key, Transactions);
+            await Storage.SetItemAsync<List<Transaction>?>(key, Transactions);
         }
 
-        status = $"Imported {parsedTransactionCount} transaction(s) from {files.Count()} file(s).";
+        status = $"Imported {parsedTransactionCount} transaction(s) from {e.FileCount} file(s).";
     }
 
     /// <summary>
@@ -163,7 +151,7 @@
     private async Task OnToggleExcluded(Transaction transaction)
     {
         transaction.IsExcluded = !transaction.IsExcluded;
-        await Storage.SetItem<List<Transaction>>(key, Transactions);
+        await Storage.SetItemAsync<List<Transaction>?>(key, Transactions);
     }
 
     /// <summary>
@@ -171,8 +159,8 @@
     /// </summary>
     private async Task OnClearStorage()
     {
-        await Storage.SetItem<List<Transaction>>(key, new List<Transaction>());
-        Transactions = await Storage.GetItem<List<Transaction>>(key);
+        await Storage.SetItemAsync<List<Transaction>?>(key, new List<Transaction>());
+        Transactions = await Storage.GetItemAsync<List<Transaction>?>(key);
         status = "Storage cleared.";
     }
 
@@ -209,55 +197,34 @@
     private async Task OnRefreshCategories()
     {
         categoriesRefreshing = true;
-        List<Match> matches = await Http.GetJsonAsync<List<Match>>("data/matches.json");
-        ParserLogic.UpdateTransactionCategories(Transactions, matches);
-        await Storage.SetItem<List<Transaction>>(key, Transactions);
-        status = $"Categories refreshed. App had {matches.Count} category filters in the database.";
+        //Parser.MatchCategories(Transactions);
+        Parser.PredictCategories(Transactions);
+        await Storage.SetItemAsync<List<Transaction>?>(key, Transactions);
+        status = $"Categories refreshed.";
         categoriesRefreshing = false;
     }
 
     private async Task OnArchiveTransactions()
     {
-        ArchivedTransactions.AddRange(Transactions);
-        await Storage.SetItem<List<Transaction>>(archiveKey, ArchivedTransactions);
-        Transactions.Clear();
-        await Storage.SetItem<List<Transaction>>(key, Transactions);
+        ArchivedTransactions?.AddRange(Transactions ?? []);
+        await Storage.SetItemAsync<List<Transaction>?>(archiveKey, ArchivedTransactions);
+        Transactions?.Clear();
+        await Storage.SetItemAsync<List<Transaction>?>(key, Transactions);
     }
 
     private async Task OnUnArchiveTransactions()
     {
-        Transactions.AddRange(ArchivedTransactions);
-        await Storage.SetItem<List<Transaction>>(key, Transactions);
-        ArchivedTransactions.Clear();
-        await Storage.SetItem<List<Transaction>>(archiveKey, ArchivedTransactions);
+        Transactions?.AddRange(ArchivedTransactions ?? []);
+        await Storage.SetItemAsync<List<Transaction>?>(key, Transactions);
+        ArchivedTransactions?.Clear();
+        await Storage.SetItemAsync<List<Transaction>?>(archiveKey, ArchivedTransactions);
     }
 
     private async Task OnExportCsv(MouseEventArgs e)
     {
-        throw new NotImplementedException();
-
-        // TODO: Need to migrate to .NET 8
-        // var obj = JsonSerializer.Serialize(objectToSave);
-        // var fileStream = new MemoryStream(new UTF8Encoding(true).GetBytes(obj));
-        // using var streamRef = new DotNetStreamReference(stream: fileStream);
-        // await JSRuntime.InvokeVoidAsync("downloadFileFromStream", fileName, streamRef);
-
-        // window.downloadFileFromStream = async (fileName, contentStreamReference) =>
-        // {
-        //     const arrayBuffer = await contentStreamReference.arrayBuffer();
-        //     const blob = new Blob([arrayBuffer]);
-        //     const url = URL.createObjectURL(blob);
-        //     const anchorElement = document.createElement('a');
-        //     anchorElement.href = url;
-
-        //     if (fileName)
-        //     {
-        //         anchorElement.download = fileName;
-        //     }
-
-        //     anchorElement.click();
-        //     anchorElement.remove();
-        //     URL.revokeObjectURL(url);
-        // }
+        var csv = Parser.ToCsv(Transactions);
+        var fileStream = new MemoryStream(new UTF8Encoding(true).GetBytes(csv));
+        using var streamRef = new DotNetStreamReference(stream: fileStream);
+        await JsRuntime.InvokeVoidAsync("DownloadFileFromStream", "data.csv", streamRef);
     }
 }
